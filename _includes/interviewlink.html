@@ -1,0 +1,19 @@
+<div class="col interviewlink">
+    <a href="{{ include.link.url }}" target="_blank">
+    <div class="card">
+      <img src="{{ include.link.image }}" 
+           class="card-img-top"
+           alt="img" style="height:197px;">
+      <div class="card-body" style="height:180px; display: flex; flex-direction: column;">
+          <p class="card-text">
+            {{ include.link.title }}
+          </p>
+          <p class="card-text" style="margin-top: auto;">
+              <small class="text-muted" style="font-size: 14px;">
+                  {{ include.link.date }}
+              </small>
+          </p>
+      </div>
+    </div>
+    </a>
+</div>

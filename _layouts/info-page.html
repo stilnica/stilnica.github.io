@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include head.html %}
+</head>
+
+
+<body style="background: linear-gradient(
+  rgba(39, 43, 40, 0.6), 
+  rgba(39, 43, 40, 0.6)
+),url('{{page.banner_image}}'); background-repeat: no-repeat;  background-size: cover; background-position: {{ page.bg_pos }} center; background-attachment: {{ page.bg_mode }}"> <!--background-attachment: fixed-->
+  
+  {% include header.html %}
+
+
+  <section class="heading-page header-text" id="top"
+    style="background:none;">
+    <div class="container" style="position: relative; top: -98px;">
+      <div class="row">
+        <div class="col-lg-12">
+          <!--<h6>Our services</h6>-->
+          <h2 style="text-transform: none; font-size: 50px;">
+            {% assign img_str_start = page.page_icon | slice: 0, 8 %}
+            {% if img_str_start == "<i class" %}
+              <span style="color: #cfcfcf;"></i>{{ page.page_icon }}</span>
+            {% else %}
+              <img src="{{page.page_icon}}"
+                style="    height: 55px;
+                width: auto;
+                margin-right: 10px;" />             
+            {% endif %}
+
+              
+              <span class="persontitle">
+                {% if page.page_title %}
+                  {{ page.page_title }}
+                {% else %}
+                  {{ page.text }}
+                {% endif %}
+              </span></h2>
+        </div>
+
+
+      </div>
+
+      <style>
+        .service-content {
+          text-align: left;
+        }
+        .service-content p {
+          line-height: 29px;
+          margin: 30px 0px;
+          text-align: left;
+        }
+        .service-content li {
+          text-align: left;
+        }
+        .info-step-num
+        {
+          background-color: #C4772B;
+          color: white;
+          font-weight: 900;
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          border-radius: 9px;
+          margin-bottom: 13px;
+        }
+
+        .side_images{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+        }
+        .side_img_text
+        {
+          text-align: right;
+          font-style: italic;
+          font-size: 16px;
+        }
+      </style>
+      {% assign images_count = 0 %}
+      {% assign main_col_width = "col-10" %}
+      {% assign side_col_width = "" %}
+      {% if page.side_images %}
+        {% assign images_count = page.side_images | size %}
+        {% if images_count > 0 %}
+          {% assign main_col_width = "col-lg-9 col-md-12" %}
+          {% assign side_col_width = "col-lg-3 col-md-12" %}
+        {% endif %}
+      {% endif %}
+      <div class="row">
+        <div class="{{ main_col_width }} mt-3 mb-3 mx-auto">
+        
+          <div class="service-content">
+            {{ page.content }}
+          </div>
+        </div>
+        {% if images_count > 0 %}
+        <div class="{{ side_col_width }} side_images">
+          {% for img in page.side_images %}
+          <div>
+            <div>
+          <a href="{{img.src}}" title="{{ img.text }}" data-lightbox="side_images">
+          <img src="{{img.src}}" />
+          </a>
+          </div>
+          <div class="side_img_text">{{ img.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% include contact-us-button.html %}
+    </div>
+  </section>
+
+
+  {% include footer.html %}
+
+  {% include footscripts.html %}
+  <script>
+    //alert("{{page.url}}");
+  </script>
+</body>
+
+</html>

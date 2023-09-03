@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+  {% include head.html %}
+</head>
+
+<!--
+TODO:
+✅️ 1. Hide nav if the page is fully visible
+✅️ 2. If navigated to the bottom, highlight the last visible section
+✅️ 3. Fix the [object, object] on sliding to section
+✅️ 4. Give more buffer on section top, and navigate more accurately
+5. Fix the banner background image position
+✅️ 6. Layout of the subheader/buttons on small screens
+✅️ 7. Click on subheader scroll to top
+✅️ 8. Rearrange the custom.js
+✅️ 9. click-section scroll stop? (on small screens?)
+10. Tonya's page: button should appear only if scrollable, more than the menu height
+-->
+
+{% assign numofbooks = page.books-of | size %}
+{% assign numOfReviews = page.review_links | size %}
+{% assign numOfInterviews = page.interview_links | size %}
+
+{% assign person_bg = "background: linear-gradient(rgba(39, 43, 40, 0.6), rgba(39, 43, 40, 0.6)),url('" | append: page.header-pic  | append: "'); background-repeat: no-repeat; background-size: cover;" %}
+{% assign body_bg = "" %}
+
+{% assign show_submenu = true %}
+{% if numofbooks==0 and numOfReviews==0 and numOfInterviews %}
+{% assign show_submenu = false %}
+{% assign body_bg = person_bg %}
+{% endif %}
+
+
+
+<body style="{{ body_bg }}; min-height: 100%;">
+  
+  {% include header.html %}
+
+
+<!-- person page: sticky person sub header-->
+{% if show_submenu %}
+<div class="container-fluid subheader" style="z-index: 11000; visibility:hidden;">
+  <div class="container" style="position:relative; top: -22px;">
+  <img id="person-subheader-pic" src="{{ page.person-pic }}" style="width: auto;z-index: 9000;height: 76px;border-radius: 50%;">
+    <span id="person-subheader-name" style="color:#C4772B;">
+      {% if page.firstname %}
+          {{ page.firstname }}
+      {% endif%}
+      {% if page.lastname %}
+          <span id="subheader-last-name">{{ page.lastname }}</span>
+      {% endif%}
+    </span>
+    <span class="section-item scroll-to-section">
+      <a href="#moreabout">Биография</a>
+    </span>
+
+    {% if numofbooks > 0 %}
+    <span class="section-item scroll-to-section">
+      <a href="#booksof">Книги</a>
+    </span>
+    {% endif %}
+    {% if numOfReviews > 0 %}
+    <span class="section-item scroll-to-section">
+      <a href="#reviews">Отзиви</a>
+    </span>
+    {% endif %}
+    {% if numOfInterviews > 0 %}
+    <span class="section-item scroll-to-section">
+      <a href="#interviews">Интервюта</a>
+    </span>
+    {% endif %}    
+  </div>
+</div>
+<div class="container-fluid subheader subheader-bg" style="z-index: 9000; background-color: #f7f7f7; height: 35px;">
+  <div class="container" style="padding-left: 105px;">
+</div>
+</div> 
+{% endif %}
+<!-- / person page: sticky person sub header-->
+
+  {% assign main_section_height = "" %}
+  {% assign person_section_bg = person_bg %}
+  
+  {% if show_submenu == false %}
+    {% assign main_section_height = "height: 100%;" %}
+    {% assign person_section_bg = "" %}
+  {% endif %}
+  <div style="{{ person_section_bg }} {{main_section_height}}">
+  <section class="header-text" id="top"
+    style="text-align: left; background: none; padding-top: 50px; padding-bottom: 50px;"><!--height:550px; margin-bottom: 50px;-->
+    <div class="container" style="position: relative; padding-top: 143px;"><!--top: -98px;-->
+      <div class="row">
+        <div class="col-lg-12">
+          <!--<h6 style="position: relative; top: -17px; font-weight: bold;">Кои сме</h6>-->
+          <h2 style="text-transform: none; font-size: 50px;"> <img src="{{ page.person-pic }}"
+              style="height: 76px; border-radius: 50%; width: auto;" /> <span class="persontitle" style="font-weight: bold;">{{ page.firstname }}
+              {{ page.lastname }}</span></h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-5 col-7 mt-3 mb-3">
+          {{ page.intro }}
+        </div>
+      </div>
+      {% if show_submenu %}
+      <div class="row" id="person-nav" style="display:none;">
+        <div class="col-12 mt-0 mt-md-4">
+          <span>
+            <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
+              <div class="scroll-to-section">
+                <a href="#moreabout">
+                  Биография
+                </a>
+              </div>
+            </div>
+          </span>
+
+          {% if numofbooks > 0 %}
+          <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
+            <div class="scroll-to-section">
+              <a href="#booksof">
+                Книги
+              </a>
+            </div>
+          </div>
+          {% endif %}
+          {% if numOfReviews > 0 %}
+          <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
+            <div class="scroll-to-section">
+              <a href="#reviews">
+                Отзиви
+              </a>
+            </div>
+          </div>
+          {% endif %}
+          {% if numOfInterviews > 0 %}
+          <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
+            <div class="scroll-to-section">
+              <a href="#interviews">
+                Интервюта
+              </a>
+            </div>
+          </div>
+          {% endif %}          
+
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="container-fluid jumpt-to-section" id="moreabout" style="padding-bottom: 30px; padding-top: 30px;">
+    <div class="row" style="color: white;">
+      <div class="col-lg-8 mx-auto" style="line-height: 1.8;">
+        <!--<strong style="font-size:32px;">{{ page.firstname }} {{ page.lastname }}</strong><span style="margin-left:10px;">е:</span>-->
+        {{ content }}
+      </div>
+    </div>
+  </section>
+</div>
+
+  {% if numofbooks > 0 %}
+  <section class="container-fluid jumpt-to-section" id="booksof" style="background-color:#1e2220; ">
+    <div class="row" style="color: #cfcfcf;">
+      <div class="col-lg-8 mx-auto pt-3 pb-3" style="line-height: 1.8; padding-bottom: 65px !important;">
+
+        <p><strong style="font-size:32px;">Книги</strong></p>
+        {% for book in page.books-of %}
+          {% assign bookitem = site.books | where: "item-id", book  | first %}
+          {% include about-person-book.html book=bookitem %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if numOfReviews > 0 %}
+  <section class="container-fluid jumpt-to-section" id="reviews"
+    style="background-color: #262a27">
+    <div class="row pt-3 pb-3">
+      <div class="col-lg-8 mx-auto">
+
+        <p><strong style="font-size:32px;">Отзиви</strong></p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-3 mt-4"><!---->
+        {% for medialink in page.review_links %}
+          {% include medialink.html link=medialink quote_symbol=true %}
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if numOfInterviews > 0 %}
+  <section class="container-fluid jumpt-to-section" id="interviews"
+    style="background-color: #303432;">
+    <div class="row pt-3 pb-3">
+      <div class="col-lg-8 mx-auto">
+
+        <p><strong style="font-size:32px;">Интервюта</strong></p>
+        <div class="row-cols-2 row-cols-md-3 row row-cols-lg-3 row-cols-xl-4 g-4 mt-5"> <!-- row-cols-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 g-4 mt-5 -->
+
+        {% for interviewlink in page.interview_links %}
+          {% include interviewlink.html link=interviewlink %}
+        {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% include footer.html %}
+
+  {% include footscripts.html %}
+</body>
+
+</html>

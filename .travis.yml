@@ -1,0 +1,27 @@
+language: ruby
+cache: bundler
+branches:
+  only:
+  - work
+script:
+  - JEKYLL_ENV=production bundle exec jekyll build --destination site
+deploy:
+  provider: pages
+  local-dir: ./site
+  target-branch: master
+  email: alrotem@gmail.com
+  name: Alon Rotem
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: work
+before_install:
+  - gem update bundler --force
+  - yes | gem update --system
+notifications:
+  email:
+    recipients:
+      - alrotem@gmail.com
+    on_success: always # default: change
+    on_failure: always # default: always

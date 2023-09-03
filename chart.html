@@ -1,0 +1,259 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: default
+steps:
+    - 
+        icon: "\uf1d8" #ico_paper_plane
+        color: "#fc7965"
+        color_hover: "yellow"
+        text: "Editing your book"
+
+    -
+        icon: "\uf002" # ico_magnifying
+        color: "#d34b47"
+        color_hover: "yellow"
+        text: "Text proofing"
+        
+    -
+        icon: "\uf0ad" # ico_wrench
+        color: "#a92c49"
+        color_hover: "yellow"
+        text: "Correcting your style"
+
+    -
+        icon: "\uf0eb" # ico_lightbulb
+        color: "#5b2056"
+        color_hover: "yellow"
+        text: "Brainstorming ideas"
+
+    -
+        icon: "\uf4c6" # ico_handshake
+        color: "#291435"
+        color_hover: "yellow"
+        text: "Personally consulting"
+
+    -
+        icon: "\ue0bb" # ico_book_marked
+        color: "green"
+        color_hover: "yellow"
+        text: "Helping your book get published!"
+---
+<style>
+    canvas {
+        width: 100%;
+        height: 300px;
+        margin: 30px 0px;
+      }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="display:flex; justify-content: center;">
+            <canvas id="chart-canvas"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    var activelink = "";
+    var links = ["/editing", "/proofing", "/consulting"];
+
+    var canvas = document.getElementById("chart-canvas");
+    var ctx = canvas.getContext('2d');
+    var cursor = {
+        x: undefined,
+        y: undefined
+    }
+    var scale = 1;
+    var c_height = 164 * scale, c_margin = c_height/2,  c_width = 150 * scale, tip_size = 39 * scale, text_margin = 15*scale;
+
+    var paths = [];
+    var paths_vertical = [];
+
+    // go over all the steps, except the last (if there are more than one)
+    // go over the last step
+    {% assign steps_count = page.steps | size %}
+    {% assign main_steps_count = steps_count | minus: 1  %}
+
+    //more than one step (more than 0 main steps)
+    {% if  main_steps_count > 0 %}        
+        {% for step in page.steps limit:main_steps_count  %}
+            //horizontal
+            paths.push(
+                {
+                    path_horizontal : [
+                        c_width*paths.length, c_margin,
+                        c_width*(paths.length+1), c_margin,
+                        c_width*(paths.length+1) + tip_size, c_height/2 + c_margin,
+                        c_width*(paths.length+1), c_height + c_margin,
+                        c_width*paths.length, c_height + c_margin,
+                        (paths.length == 0)? c_width*paths.length : c_width*paths.length + tip_size,
+                        (paths.length == 0)? c_margin : c_height/2 + c_margin
+                    ],
+                    path_vertical: [
+                            c_margin, 
+                            {{forloop.index0}}*c_width,    
+                            (paths.length == 0)?c_margin : c_margin + (c_height/2),
+                            (paths.length == 0)?{{forloop.index0}}*c_width: {{forloop.index0}}*c_width + tip_size,
+                            c_margin+c_height,
+                            {{forloop.index0}}*c_width,
+                            c_margin+c_height,
+                            ({{forloop.index0}}+1)*c_width,
+                            c_margin + (c_height/2),
+                            ({{forloop.index0}}+1)*c_width+tip_size,
+                            c_margin, ({{forloop.index0}}+1)*c_width
+                    ],
+                    icon: "{{ step.icon }}",
+                    color: "{{ step.color }}",
+                    color_hover: "{{ step.color_hover }}",
+                    text: "{{ step.text }}"
+                }
+            );
+        {% endfor %}
+    {% endif %}
+    // there is a final step (more than 0 in total)
+    {% if steps_count > 0 %}
+    {% assign step = page.steps | last %}
+        paths.push(
+            {
+                path_horizontal : [
+                    c_width*paths.length - tip_size, c_margin - c_height/2, 
+                    c_width*(paths.length+1) - tip_size, c_margin - c_height/2,
+                    c_width*(paths.length+1) + tip_size, c_height/2 + c_margin,
+                    c_width*(paths.length+1) -tip_size, c_height + c_margin + c_height/2,
+                    c_width*paths.length -tip_size, c_height +  c_margin + c_height/2,
+                    (paths.length == 0)? c_width*paths.length : c_width*paths.length + tip_size,
+                    (paths.length == 0)? c_margin : c_height/2 + c_margin
+                ],
+                path_vertical:         [
+                    0, paths.length * c_width - tip_size,
+                    c_margin + (c_height/2), paths.length * c_width + tip_size,
+                    c_height*2, paths.length * c_width - tip_size,
+                    c_height * 2, (paths.length + 1) * c_width - tip_size,
+                    c_margin + (c_height/2), (paths.length +1) * c_width + tip_size,
+                    0, (paths.length + 1) * c_width - tip_size
+                ] ,
+                icon: "{{ step.icon }}",
+                color: "{{ step.color }}",
+                color_hover: "{{ step.color_hover }}",
+                text: "{{ step.text }}"
+            }
+        );
+    {% endif %}
+
+    window.addEventListener("mousemove", (e) => {
+        cursor.x = e.x - canvas.offsetLeft;
+        cursor.y = e.y - canvas.offsetTop;
+    });
+
+    function drawChart(){
+        var cursorInPath = -1;
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        canvas.width  = canvas.offsetWidth;
+        //var drawpaths = paths;
+        var vertical_view = false;
+        if(window.innerWidth >= 1100)
+        {
+            canvas.height = c_height * 2; //horizontal only
+            canvas.style.height = (c_height * 2) + "px"; //horizontal only
+            canvas.style.width = (paths.length * c_width + tip_size) + "px"; //horizontal only
+        }
+        else
+        {
+            canvas.height = (c_width * paths.length + tip_size); //vertical only
+            canvas.style.width = (c_height * 2) + "px"; //vertical only
+            canvas.style.height = (c_width * paths.length + tip_size) + "px"; //vertical only
+            //drawpaths = paths_vertical;
+            vertical_view = true;
+        }
+
+        for(var p=0; p < paths.length; p++){
+            var path = new Path2D();
+            var points = (vertical_view)?  paths[p].path_vertical : paths[p].path_horizontal;
+            for(var i=0; i < points.length; i++)
+            {
+                path.lineTo(points[i], points[++i]);
+            }
+            path.closePath();
+            if (cursor.x >= 0 && cursor.y >= 0 && ctx.isPointInPath(path, cursor.x, cursor.y + window.scrollY))
+            {
+                fill = paths[p].color_hover;
+                cursorInPath = p;
+            }
+            else
+            {
+                fill = paths[p].color;
+            }
+            Object.assign(ctx, { fillStyle: fill }).fill(path);
+            
+            ctx.fillStyle = "white"
+            ctx.font="25px 'Font Awesome 6 Free'";
+            ctx.fillText(paths[p].icon, tip_size + text_margin + c_width * p, c_margin + text_margin * 3);
+
+            ctx.font="15px 'AlegreyaSansRegular', 'sans-serif'";
+            ctx.fillText(paths[p].text, tip_size + text_margin + c_width * p, c_margin + text_margin * 3 + 40);
+
+        }
+        if(cursorInPath >= 0)
+        {
+            canvas.style.cursor = "pointer";
+            if(cursorInPath < links.length){
+                activelink = links[cursorInPath];
+            }
+        }
+        else
+        {
+            canvas.style.cursor = "default";
+            activelink = "";
+        }
+        requestAnimationFrame(drawChart);
+    }
+    drawChart();
+</script>
+<!--
+top: 0
+base_width: 129
+base_height: 168
+
+
+129*0, top    129*1,top	               129*2,top              129*3,top
+ [----------------]-----------------------]-----------------------]
+ |	              \                       \                       \
+ |                 \                       \                       \
+ |                  \                       \                       \
+ |                   \                       \                       \
+ |                    > 168, 82               > 129*2 + (168-129), 82 >  129*3 + (168-129, 82
+ |                   /                       /                       /
+ |                  /                       /                       /
+ |                 /                       /                       /
+ |                /                       /                       / 
+ [---------------]-----------------------]-----------------------]
+0,164             129, 82*2		129*2, 82*2           129*3, 82*2
+
+[0,0 ,129,0, 168,82, 129,164, 0, 164],
+[129*1,0, 129*2, 0, 129*2+(168-129), 82, 129*2, 164, 129, 164, 168,82],
+[129*2, 0, 129*3, 0, 129*3 + (168-129), 82, 129*3, 82*2, 129*2, 82*2, 129*2 + (168-129),82]
+
+164*0, top                 164*1, top
+[---------------------------]
+|                           |
+|                           |
+|                           |
+|                           |
+|                           |
+| 164*0, 129                |164, 129
+ \                         /
+  \                       /
+   \                     /
+    \                   /
+     \                 /
+      \               /
+            ...
+             V
+             164/2, 129 /2
+
+var c_height = 164 * scale, c_margin = c_height/2,  c_width = 149 * scale, tip_size = 39 * scale, text_margin = 15*scale;
+[c_height * 0, c_margin, c_height*1, c_margin, c_height * (i+1), c_width, c_height/2, c_width * (i+1.5), c_height * 0, c_width]
+-->

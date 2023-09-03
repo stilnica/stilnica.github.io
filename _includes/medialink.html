@@ -1,0 +1,28 @@
+<div class="col medialink">
+  <a target="_blank" href="{{ include.link.url }}">
+  <div class="card" style="background-image:url({{ include.link.image }});">
+    <div class="card-body">
+      <div class="card-overlay">
+        <div class="card-inner">
+        <div class="quote-section">
+          {% if include.quote_symbol %}
+          <div class="quote-icon">
+            <img src="/assets/images/quote-white.png">
+          </div>
+          {% endif %}
+          {{ include.link.title }}...
+          {% if include.link.quote_person %}
+          <div class="quote-person">
+            <strong>{{ include.link.quote_person }}</strong>{% if include.link.quote_person_desc %}, {{ include.link.quote_person_desc }}{% endif %}
+          </div>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+      {% if include.link.medialogo and include.link.medialogo != "" %}
+      <img class="media-logo" src="/assets/images/media-logos/{{ include.link.medialogo }}">
+      {% endif %}
+  </div>
+</div>
+</a>
+</div>

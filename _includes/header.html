@@ -1,0 +1,141 @@
+  <!-- ***** Header Area Start ***** -->
+  <style>
+    .sub-menu a.active {
+        color: #C4772B !important;
+        font-weight: 800 !important;
+    }
+</style>
+  <header id="main-menu" class="header-area header-sticky" style="z-index:10000">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav"  id="pagetop">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/{{ site.homepage }}" class="logo" style="top: -4px;">
+                        <div style="line-height: 88px;">
+                        <div class="nav-logo-container">
+                            <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
+                        </div>
+                        <div style="font-size: 13px;  height: 13px; line-height: 13px; font-weight: bold; letter-spacing: 4.55px;">
+                            БУТИК ЗА РЪКОПИСИ
+                        </div>
+                    </div>
+                        <!--Edu Meeting-->
+                        <!--<span class="mastilnitsata responsive-logo"></span>-->
+                        <!--<span class="mastilnitsata mastilnitsata-mastilnitsata-brand-inkpot"></span>-->
+                        <!--<span class="mastilnitsata mastilnitsata-new-m-logo"></span>-->
+                        <!--<div style="text-transform: none !important;
+                        text-shadow: -2px 9px 12px rgba(0, 0, 0, 0.81); font-weight: normal;">
+                            <span class="mastilnitsata mastilnitsata-hipster-m" style="font-size:60px;"></span>
+                            <span style="font-family: karano !important;
+                            font-size: 33px;
+                            position: relative;
+                            left: -6px;;
+                            top: 4px;">СТИЛница</span>
+                            </div>-->
+
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    {% assign current_url = page.url | relative_url | remove : '.html' %}
+                    {% assign site_homepage = site.homepage | relative_url | remove : '.html' %}
+
+                    <ul class="nav" style="font-family: karano">
+                        {% if current_url=="" or current_url=="/" or current_url contains site_homepage %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="scroll-to-section"><a href="/{{ site.homepage }}" class="{{ active_class }}">Начало</a></li>
+ 
+                        {% if current_url contains "/people/" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="has-sub"><a class="{{active_class}}" href="javascript:void(0)">Кой</a>
+                            <ul class="sub-menu">
+                            {% for person in site.people %}
+                                {% assign person_url = person.url | relative_url | remove : '.html' %}
+                                {% if current_url == person_url %}
+                                {% assign active_class="active" %}
+                                {% else %}
+                                    {% assign active_class="" %}
+                                {% endif %}
+
+                            <li><a href="{{person.url | relative_url | remove : '.html'}}" class="{{ active_class }}">{{ person.firstname }} {{ person.lastname }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+
+                        {% if current_url contains "/services/" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="has-sub"><a href="javascript:void(0)" class="{{active_class}}">Какво</a>
+                            <ul class="sub-menu">
+                                {% for service in site.services %}
+                                    {% assign service_url = service.url | relative_url | remove : '.html' %}
+                                    {% if current_url == service_url %}
+                                    {% assign active_class="active" %}
+                                    {% else %}
+                                        {% assign active_class="" %}
+                                    {% endif %}
+                                    <li><a href="{{service_url}}" class="{{active_class}}">{{ service.text }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {% if current_url contains "/process" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}                        
+                        <li class="has-sub"><a class="{{active_class}}" href="javascript:void(0)">Как</a>
+                            <ul class="sub-menu">
+                                {% if current_url contains "/process/how" %}
+                                    {% assign active_class="active" %}
+                                {% else %}
+                                    {% assign active_class="" %}
+                                {% endif %}                                  
+                                <li><a href="/process/how" class="{{ active_class }}">Процесът</a></li>
+                                {% if current_url contains "/process/concerns" %}
+                                    {% assign active_class="active" %}
+                                {% else %}
+                                    {% assign active_class="" %}
+                                {% endif %}                                  
+                                <li><a href="/process/concerns" class="{{ active_class }}">Някои съображения</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                        <!--<li class="scroll-to-section"><a href="#courses">Новини</a></li> -->
+
+                        <li class="scroll-to-section"><a href="/{{ site.homepage }}#contact">Къде</a></li> 
+
+                        <li class="has-sub">
+                            <a href="javascript:void(0)">Литературни</a>
+                            <ul class="sub-menu">
+                                <li><a href="https://literaturnirazgovori.com/" target="_blank"><span class="mastilnitsata mastilnitsata-sphere"></span> Литературни разговори</a></li>
+                                <li><a href="https://www.facebook.com/literaturnirazgovori/" target="_blank"><span class="mastilnitsata mastilnitsata-facebook2"></span> Литературни разговори с АА</a></li>
+                            </ul>
+                        </li>                        
+                    </ul>        
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ***** Header Area End ***** -->
+
+<a id="scrollup" href="javascript:void(0)">
+<img src="/assets/images/scroll-up.png"  />
+</a>

@@ -1,0 +1,563 @@
+<!--
+    Source:
+    https://www.freepik.com/free-vector/value-chain-chart-infographic_8642466.htm#page=17&query=process%20flow%20infographic%20quill&position=27&from_view=search&track=ais
+-->
+<style>
+    canvas {
+        border: 0px solid lightblue;
+        width: 100%;
+        height: 300px;
+        margin: 30px 0px;
+      }
+</style>
+<!--<div class="container">
+    <div class="row">
+        <div class="col-12" style="display:flex; justify-content: center;">-->
+            <canvas id="chart-canvas"></canvas>
+        <!--</div>
+    </div>
+</div>-->
+
+<script>
+    var activelink = "";
+
+    var canvas = document.getElementById("chart-canvas");
+    var ctx = canvas.getContext('2d');
+    var cursor = {
+        x: undefined,
+        y: undefined
+    }
+    var scale = 1;
+    var buffer_margin = 12; c_height = 164 * scale, c_margin = c_height/2,  c_width = 150 * scale, tip_size = 39 * scale, text_margin = 15*scale;
+
+    var paths = [];
+    var texts = [];
+    var icon_images = {};
+    //var newImage = new Image();
+    //newImage.src = "/assets/images/icons/consult.png";
+    //icon_images.push(newImage);
+    /*
+    newImage.onload = function () {
+        drawChart();
+    }
+    */
+    var img_bg = new Image();
+    img_bg.src = "/assets/images/backgrounds/consultation-2.jpg";
+
+    function wrap_text(text, fontName, fontSize, fontColor, fontweight, x, y, max_width) {
+        //var max_width  = 100;
+        //var fontSize   =  12;
+        var lines      =  new Array();
+        var /*width = 100,*/ i, j;
+        var result;
+        var color = fontColor || "white";
+        var font = fontName || "Arial";
+        fontweight  = fontweight || "normal";
+
+        ctx.font   = fontSize + "px " + font;
+        
+        // Start calculation
+        while ( text.length ) {
+            for( i=text.length; ctx.measureText(text.substr(0,i)).width > max_width; i-- );
+        
+            result = text.substr(0,i);
+        
+            if ( i !== text.length )
+                for( j=0; result.indexOf(" ",j) !== -1; j=result.indexOf(" ",j)+1 );
+            
+            lines.push( result.substr(0, j|| result.length) );
+            width = 100;//Math.max( width, ctx.measureText(lines[ lines.length-1 ]).width );
+            text  = text.substr( lines[ lines.length-1 ].length, text.length );
+        }
+        
+        
+        // Calculate canvas size, add margin
+        //ctx.canvas.width  = 14 + width;
+        //ctx.canvas.height =  8 + ( fontSize + 5 ) * lines.length;
+        ctx.font   = fontweight + " " + fontSize + "px Arial";
+
+        // Render
+        ctx.fillStyle = color;
+        for ( i=0, j=lines.length; i<j; ++i ) {
+            ctx.fillText( lines[i], x, y + fontSize + (fontSize+5) * i );
+        }
+    }
+
+    // go over all the steps, except the last (if there are more than one)
+    // go over the last step
+    {% assign steps_count = include.steps | size %}
+    {% assign main_steps_count = steps_count | minus: 1  %}
+
+/*
+--------------------------------------------------------------------------------------------------------
+                                                                      ^
+                                                                      |
+                                                                   c_margin (c_height/2)
+                                  <- ----- c_width ----- ->           |
+                          x1,y1 (x6,y6 if first path)   x2,y2         v
+                  [---------------]-----------------------]-----------------------]        --- 
+                  |	               \                       \                       \        ^
+                  |                 \                       \                       \       |
+                  |                  \                       \                       \      |
+                  |                   \                       \                       \     |
+<- buffer_margin->|                    >  x6,y6                > x3,y3                 >  c_height
+                  |                   /                       /                       /     |
+                  |                  /                       /                       /      |
+                  |                 /                       /                       /       |
+                  |                /                       /                       /        v 
+                  [---------------]-----------------------]-----------------------]        ---
+                                x5,y5                  x4,y4
+                                 |<--+->|tip_size                                
+ 
+Path starts at upper-left corner. Both for horizontal and vertical.
+Dotted line, if set, is drawn at the far end of the path (connected from outside to x2,y2 - x3,y3 - x4,y4)
+*/
+/*
+horizontal texts
+x
+p==0 -> buffer_margin + ((c_width + tip_size)/2)
+p>0 ->  buffer_margin + (c_width * p) + ((c_width + tip_size)/2)
+y
+c_margin + (c_height /2)
+*/
+
+
+    //more than one step (more than 0 main steps)
+    {% if  main_steps_count > 0 %}        
+        {% for step in site.services limit:main_steps_count  %}
+            //horizontal
+            paths.push(
+                {
+                    path_horizontal : [
+                        /*x1*/ buffer_margin + c_width*paths.length , /*y1*/ c_margin,
+                        /*x2*/ buffer_margin + c_width*(paths.length+1), /*y2*/ c_margin,
+                        /*x3*/ buffer_margin + c_width*(paths.length+1) + tip_size, /*y2*/ c_height/2 + c_margin,
+                        /*x4*/ buffer_margin + c_width*(paths.length+1), /*y4*/ c_height + c_margin,
+                        /*x5*/ buffer_margin + c_width*paths.length, /*y5*/ c_height + c_margin,
+                        /*x6*/ (paths.length == 0)? buffer_margin + c_width*paths.length : buffer_margin + c_width*paths.length + tip_size,
+                        /*y6*/ (paths.length == 0)? c_margin : c_height/2 + c_margin
+                    ],
+                    path_vertical: [
+                            /*x1*/ c_margin, /*y1*/ buffer_margin + {{forloop.index0}}*c_width,    
+                            /*x2*/ (paths.length == 0)?c_margin : c_margin + (c_height/2),
+                            /*y2*/ (paths.length == 0)?buffer_margin + {{forloop.index0}}*c_width: buffer_margin + {{forloop.index0}}*c_width + tip_size,
+                            /*x3*/ c_margin+c_height, /*y3*/ buffer_margin + {{forloop.index0}}*c_width,
+                            /*x4*/ c_margin+c_height, /*y4*/ buffer_margin + ({{forloop.index0}}+1)*c_width,
+                            /*x5*/ c_margin + (c_height/2), /*y5*/ buffer_margin + ({{forloop.index0}}+1)*c_width+tip_size,
+                            /*x6*/ c_margin, /*y6*/ buffer_margin + ({{forloop.index0}}+1)*c_width
+                    ],
+                    icon: "{{ step.icon }}",
+                    color: "{{ step.color }}",
+                    color_hover: "{{ step.color_hover }}",
+                    text: "{{ step.text }}",
+                    url: "{{ step.url  | relative_url | remove : '.html' }}",
+                    tooptip: "{{ step.tooltip }}",
+                    use_image_for_chart: "{{ step.use_image_for_chart }}".toUpperCase().trim() == "TRUE",
+                    img: new Image(),
+                    img_src: "{{ step.banner_image }}",
+                    
+                    //Dotted line, if set, is drawn at the far end of the path (connected from outside to x2,y2 - x3,y3 - x4,y4)
+                    dotted: ("{{ step.dotted }}".trim().toLowerCase() != "true")? null: [
+                        buffer_margin + c_width*(paths.length+1) - tip_size, 0,
+                        buffer_margin + c_width*(paths.length+1) + tip_size, c_height/2 + c_margin,
+                        buffer_margin + c_width*(paths.length+1) - tip_size, c_height * 2
+
+                    ],
+                    dotted_vertical: ("{{ step.dotted }}".trim().toLowerCase() != "true")? null: [
+                        0, buffer_margin + ({{forloop.index0}}+1)*c_width -tip_size,
+                        c_margin + (c_height/2),
+                        buffer_margin + ({{forloop.index0}}+1)*c_width+tip_size,
+                        
+                            c_height * 2,
+                            buffer_margin + ({{forloop.index0}}+1)*c_width -tip_size
+                    ]
+                }
+            );
+            if("{{ step.icon }}".indexOf("/") >= 0)
+            {
+                //var icon_images = [];
+                var image = new Image();
+                image.src = "{{step.icon}}";//"/assets/images/icons/icon_bg.png";//
+                icon_images["{{forloop.index0}}"] = image;
+            }
+        {% endfor %}
+    {% endif %}
+    // there is a final step (more than 0 in total)
+    {% if steps_count > 0 %}
+    {% assign step = include.steps | last %}
+        paths.push(
+            {
+                path_horizontal : [
+                    buffer_margin + c_width*paths.length - tip_size, c_margin - c_height/2, 
+                    buffer_margin + c_width*(paths.length+1) - tip_size, c_margin - c_height/2,
+                    buffer_margin + c_width*(paths.length+1) + tip_size, c_height/2 + c_margin,
+                    buffer_margin + c_width*(paths.length+1) -tip_size, c_height + c_margin + c_height/2,
+                    buffer_margin + c_width*paths.length -tip_size, c_height +  c_margin + c_height/2,
+                    (paths.length == 0)? buffer_margin + c_width*paths.length : buffer_margin + c_width*paths.length + tip_size,
+                    (paths.length == 0)? c_margin : c_height/2 + c_margin
+                ],
+                path_vertical:         [
+                    0, buffer_margin + paths.length * c_width - tip_size,
+                    c_margin + (c_height/2), buffer_margin + paths.length * c_width + tip_size,
+                    c_height*2, buffer_margin + paths.length * c_width - tip_size,
+                    c_height * 2, buffer_margin + (paths.length + 1) * c_width - tip_size,
+                    c_margin + (c_height/2), buffer_margin + (paths.length +1) * c_width + tip_size,
+                    0, buffer_margin + (paths.length + 1) * c_width - tip_size
+                ] ,
+                icon: "{{ step.icon }}",
+                color: "{{ step.color }}",
+                color_hover: "{{ step.color_hover }}",
+                text: "{{ step.text }}",
+                url: "{{ step.url }}",
+                tooptip: "{{ step.tooltip }}",
+                use_image_for_chart: "{{ step.use_image_for_chart }}".toUpperCase().trim() == "TRUE",
+                img: new Image(),
+                img_src: "{{ step.banner_image }}",
+            }
+        );
+        if("{{ step.icon }}".indexOf("/") >= 0)
+        {
+            //var icon_images = [];
+            var image = new Image();
+            image.src = "{{step.icon}}";
+            icon_images["{{main_steps_count}}"] = image;
+        }
+    {% endif %}
+
+    // external texts are placed outside (above/below the paths), centred along the to-from paths
+    {% for text in include.texts %}
+        texts.push({
+            horizontal: {
+                x: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
+                y: ("{{text.position}}".trim().toLowerCase()=="top")? c_margin/3 : c_height * 1.5 + 2* c_margin/3,
+                text: "{{text.text}}"
+            },
+            vertical: {
+                x: ("{{text.position}}".trim().toLowerCase()=="top")? c_height * 1.5 + 2* c_margin/3: c_margin/3,
+                y: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
+                text: "{{text.text}}"
+            }
+        })      
+    {% endfor %}
+    
+    for(p = 0; p < paths.length; p++)
+    {
+        if(paths[p].img_src){
+            paths[p].img.onload = function() {
+                //paths[p].img_height = paths[p].img.height;
+                //paths[p].img_width = paths[p].img.width;
+                //paths[p].img_loaded = true;
+                //alert("h: " + paths[p].img_height + ", w: " + paths[p].img_width)
+            }
+            paths[p].img.src = paths[p].img_src
+        }
+    }
+    
+    canvas.addEventListener("mousemove", (e) => {
+        cursor.x = e.offsetX;
+        cursor.y = e.offsetY;
+    });
+
+    canvas.addEventListener ("mouseout", (e) => {
+        cursor.x = undefined;
+        cursor.y = undefined;
+    });
+
+
+    canvas.addEventListener("mousedown", (e) => {
+        if(e.button == 0 && activelink)
+        {
+            window.location.href = activelink;
+        }
+    });
+
+    function drawTooltip(text, px_height, text_color, fill_color, border_color)
+    {
+    var
+        tip_height = 10,
+        tip_width = 10,
+        tooltip_y_offset = 20,
+        tooltip_x_offset = 10;
+        
+        if(border_color)
+        ctx.strokeStyle = border_color;
+    ctx.fillStyle = fill_color;
+    ctx.lineWidth = 1;
+    
+    text_margin = 30;
+    ctx.font = px_height + "px Arial";
+    ctx.textAlign = "center";
+    var tooltip_width = ctx.measureText(text).width + text_margin;
+    var tooltip_height = px_height + text_margin;
+    
+    var tooltip_shift_x = 0;
+    var beyond_left_edge = (((tooltip_width/2) - (tip_width)) - cursor.x);
+    var beyond_right_edge = (canvas.width - (cursor.x + (tooltip_width/2) + tip_width));
+    if(beyond_left_edge > 0)
+    {
+        tooltip_shift_x = beyond_left_edge;
+    }
+    else if(beyond_right_edge < 0)
+    {
+            tooltip_shift_x = beyond_right_edge;
+    }
+    /*   
+                           x3,y3
+    x1,y1 / x8,y8           / \                 x5,y5
+        [------------------/   \------------------]
+        |              x2,y2   x4,y4              |
+        |                                         |
+        |                                         |
+        [-----------------------------------------]
+        x7,y7                                     x6,y6
+    */
+    
+        ctx.beginPath();
+    if (cursor.x && cursor.y){
+        /*x1,y1*/ctx.moveTo(cursor.x-(tooltip_width/2) + tooltip_x_offset+ tooltip_shift_x, cursor.y + tip_height + tooltip_y_offset);
+        /*x2,y2*/ctx.lineTo(tooltip_shift_x+ cursor.x - (tip_width/2) + tooltip_x_offset - tooltip_shift_x,  cursor.y + tip_height + tooltip_y_offset);
+        /*x3,y3*/ctx.lineTo(tooltip_shift_x+ cursor.x + tooltip_x_offset - tooltip_shift_x, cursor.y + tooltip_y_offset);
+        /*x4,y4*/ctx.lineTo(tooltip_shift_x+  cursor.x + (tip_width/2) + tooltip_x_offset - tooltip_shift_x,  cursor.y + tip_height + tooltip_y_offset);
+        /*x5,y5*/ctx.lineTo(cursor.x + (tooltip_width/2) + tooltip_x_offset +tooltip_shift_x,  cursor.y + tip_height + tooltip_y_offset);
+        /*x6,y6*/ctx.lineTo(cursor.x + (tooltip_width/2) + tooltip_x_offset + tooltip_shift_x,  cursor.y + tooltip_height + tooltip_y_offset);
+        /*x7,y7*/ctx.lineTo(cursor.x-(tooltip_width/2) + tooltip_x_offset + tooltip_shift_x, cursor.y + tooltip_height + tooltip_y_offset);
+        /*x8,y8*/ctx.lineTo(cursor.x-(tooltip_width/2) + tooltip_x_offset + tooltip_shift_x, cursor.y + tip_height + tooltip_y_offset);
+        ctx.fill();
+            //ctx.fillText("width:" + ctx.measureText(txt).width, 10, 100);
+        if(border_color)
+            ctx.stroke();
+        ctx.beginPath();
+        ctx.fillStyle = text_color;
+        ctx.fillText(text , cursor.x + tooltip_x_offset + tooltip_shift_x, cursor.y + (tooltip_height/2) + tooltip_y_offset + tip_height);
+
+        //ctx.beginPath();
+        //ctx.fillStyle = "black";
+        //ctx.fillText("width: " + tooltip_width + ", x: " + cursor.x + ", canvas width: " + canvas.width + ", beyond_right_edge: " + beyond_right_edge + ",beyond_left_edge: " + beyond_left_edge, 300, 100)
+        }
+    }
+
+    function drawChart(){
+        activelink = "";
+        var cursorInPath = -1;
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        canvas.width  = canvas.offsetWidth;
+        //var drawpaths = paths;
+        var vertical_view = false;
+        if(window.innerWidth >= 1100)
+        {
+            canvas.height = c_height * 2; //horizontal only
+            canvas.style.height = (c_height * 2) + "px"; //horizontal only
+            canvas.style.width = (paths.length * c_width + tip_size + buffer_margin) + "px"; //horizontal only
+        }
+        else
+        {
+            canvas.height = (c_width * paths.length + tip_size + buffer_margin); //vertical only
+            canvas.style.width = (c_height * 2) + "px"; //vertical only
+            canvas.style.height = (c_width * paths.length + tip_size) + "px"; //vertical only
+            vertical_view = true;
+        }
+
+        for(var p=0; p < paths.length; p++){
+            var path = new Path2D();
+            var points = (vertical_view)?  paths[p].path_vertical : paths[p].path_horizontal;
+            var dotted = (vertical_view)?  paths[p].dotted_vertical : paths[p].dotted;
+            for(var i=0; i < points.length; i++)
+            {
+                path.lineTo(points[i], points[++i]);
+            }
+            path.closePath();
+            if (cursor.x >= 0 && cursor.y >= 0 && ctx.isPointInPath(path, cursor.x, cursor.y))
+            {
+                //--bg image instead of colour               
+                if(paths[p].use_image_for_chart && paths[p].img_src){
+                    //alert(p + "::" + paths[p].img.src)
+                    ctx.save();
+                    var bg_img_path = new Path2D();
+                    var leftmost_x = 9999, rightmost_x  = -1, topmost_y = 9999, bottommost_y = -1, clip_width = -1, clip_height = -1;
+                    var img_w = paths[p].img.width, img_h = paths[p].img.height;
+                    for(var i=0; i < points.length; i++)
+                    {
+                        pt_x = points[i];
+                        pt_y = points[++i]
+                        bg_img_path.lineTo(pt_x, pt_y);
+
+                        if(pt_x < leftmost_x) leftmost_x = pt_x;
+                        if(pt_x > rightmost_x) rightmost_x = pt_x;
+                        if(pt_y < topmost_y) topmost_y = pt_y;
+                        if(pt_y > bottommost_y) bottommost_y = pt_y;
+                    }
+                    clip_width = rightmost_x - leftmost_x;
+                    clip_height = bottommost_y - topmost_y;
+                    ctx.clip(bg_img_path);
+
+                    /*
+                    //* Conserve aspect ratio of the original region. Useful when shrinking/enlarging
+                    //* images to fit into a certain area.
+                    //*
+                    //* @param {Number} srcWidth width of source image
+                    //* @param {Number} srcHeight height of source image
+                    //* @param {Number} maxWidth maximum available width
+                    //* @param {Number} maxHeight maximum available height
+                    //* @return {Object} { width, height }                    
+                    // source: https://stackoverflow.com/a/14731922
+                    function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
+                        var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+                        return { width: srcWidth*ratio, height: srcHeight*ratio };
+                    }
+                    */
+                   //changed min to max, to fill the container  with cropped edges, instead of sizing the image as priority (leaving blanks in the container)
+                    var ratio = Math.max(clip_width / img_w, clip_height / img_h);
+                    var resized_width = img_w * ratio, resized_height = img_h * ratio;
+
+                    // TODO: take actual image h x w, and be sure to clip height and width to max keeping aspect ratio
+                    ctx.drawImage(paths[p].img, leftmost_x , topmost_y, resized_width, resized_height);
+                    ctx.restore();
+                }
+                //--bg image instead of colour
+                else
+                {
+                    fill = paths[p].color_hover;
+                    Object.assign(ctx, { fillStyle: fill }).fill(path);
+                }
+                cursorInPath = p;
+                activelink = paths[p].url;
+            }
+            else
+            {
+                fill = paths[p].color;
+                Object.assign(ctx, { fillStyle: fill }).fill(path);
+            }
+            //Object.assign(ctx, { fillStyle: fill }).fill(path);
+            
+            // ========= texts and icons =========
+            
+            // The margin differetiating between text and icon
+            var text_icon_buff = 15;
+            var icon_size = (p < paths.length -1)? 32 : 64;
+            if (vertical_view)
+            {
+                posx = (c_margin + (c_height /2));
+                posy = ((p==0) ? (buffer_margin + ((c_width + tip_size)/2)) : 
+                            (buffer_margin + (c_width * p) + ((c_width + tip_size)/2)) + (tip_size/4));
+                if(p == paths.length -1)
+                {
+                    posy += 20;
+                }
+            }
+            else
+            {
+                var posx = ((p==0) ? (buffer_margin + ((c_width + tip_size)/2)) : 
+                            (buffer_margin + (c_width * p) + ((c_width + tip_size)/2)) + (tip_size/4));
+                
+                var posy = (c_margin + (c_height /2));
+            }
+
+            //if an image specified (with a "/..." path)
+            if(paths[p].icon.indexOf("/") >= 0)
+            {
+                //var img = icon_images[p];
+
+                
+                //var posx = posx - (size/2);//c_width * p + c_width/2 + ((p==0)? 0 : tip_size/2);
+                //var posy = posy - (size) -text_icon_buff;//c_margin + text_margin * 3 - 17;
+                /*
+                if (p >= paths.length -1) {
+                    posx -= 25;
+                    posy -= 32;
+                }
+                */
+                ctx.drawImage(icon_images[p], posx - (icon_size/2) , posy - icon_size - text_icon_buff, icon_size, icon_size);
+            }
+            //else treat the icon as unicode for Font Awesome
+            else {
+                ctx.fillStyle = "#cfcfcf"
+                ctx.font = icon_size + "px 'Font Awesome 6 Free'";
+                //ctx.fillText(paths[p].icon, c_width * p + c_width/2 + tip_size, c_margin + text_margin * 3);
+                ctx.fillText(paths[p].icon, posx - ((p==0)?(icon_size/2):0), posy - text_icon_buff - 2);
+            }
+
+            //step text
+            ctx.fillStyle = "#cfcfcf";
+            ctx.textAlign = "center";
+            ctx.font="bold 18px 'AlegreyaSansRegular', 'sans-serif'";
+            ctx.fillText(paths[p].text, 
+                posx, posy + text_icon_buff);
+            // ========= texts and icons =========
+
+
+            //draw the dotted lines
+            ctx.setLineDash([3, 5]);
+            if(dotted){
+                ctx.strokeStyle = 'white';
+                ctx.beginPath();
+                for(var i=0; i < dotted.length; i++)
+                {
+                    ctx.moveTo(dotted[i], dotted[++i]);
+                    ctx.lineTo(dotted[++i], dotted[++i]);
+                    i -= 2;
+                    ctx.stroke();
+                }
+            }            
+        }
+        
+        //draw the 2 side-lines
+        var side_lines = (vertical_view)? 
+            //vertical lines
+            [
+                c_margin * 2/3, 0,
+                c_margin * 2/3, (paths.length-1)*c_width,
+                c_height * 1.5 + c_margin * 1/3, 0,
+                c_height * 1.5 + c_margin * 1/3, (paths.length-1)*c_width
+            ]:
+            //horizontal lines
+            [
+                0, c_margin * 2/3,
+                (paths.length-1)*c_width, c_margin * 2/3,
+                0, c_height * 1.5 + c_margin * 1/3,
+                (paths.length-1)*c_width , c_height * 1.5 + c_margin * 1/3
+            ];
+        ctx.strokeStyle = 'white';
+        ctx.setLineDash([1, 0]);
+        for(var i=0; i < side_lines.length; i++)
+        {
+            ctx.beginPath();
+            ctx.moveTo(side_lines[i], side_lines[++i]);
+            ctx.lineTo(side_lines[++i], side_lines[++i]);
+            ctx.stroke();
+        }
+
+        // draw side texts
+        var text_direction = (vertical_view)? "vertical" : "horizontal";
+        for(var i=0; i < texts.length; i++)
+        {
+            ctx.font = "15px Arial";
+            ctx.textAlign = "center";
+
+            if(vertical_view){
+                ctx.save();
+                ctx.translate(texts[i][text_direction].x, texts[i][text_direction].y);
+                ctx.rotate(Math.PI/2);
+                ctx.textAlign = "center";            
+                ctx.fillText(texts[i][text_direction].text, 0,0);
+                ctx.restore();
+
+            }
+            else
+            {
+                ctx.fillText(texts[i][text_direction].text, texts[i][text_direction].x, texts[i][text_direction].y);
+            }
+        }
+
+        if(cursorInPath >= 0)
+        {
+            canvas.style.cursor = "pointer";
+            drawTooltip(paths[cursorInPath].tooptip, 16, "white", paths[cursorInPath].color, "white");
+        }
+        else
+        {
+            canvas.style.cursor = "default";
+        }
+        requestAnimationFrame(drawChart);
+    }
+    requestAnimationFrame(drawChart);
+</script>
