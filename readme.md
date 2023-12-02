@@ -2,7 +2,17 @@ Travis says:
 [![Build Status](https://travis-ci.com/mastilnicata/mastilnicata.github.io.svg?branch=work)](https://travis-ci.com/github/mastilnicata/mastilnicata.github.io)
 
 
-
+## TODO
+* Layout fixes
+  * Person page: adjust background in mobile mode
+  * Service page: text over picture is hard to read
+* Fix texts in chart tooltips
+* 404 page
+* Loading progress
+* Add SEO + Facebook debugger to pages
+* stilnitsa.com -> stilnica.com
+* Content administration
+* Menu bug - not always reproducing
 
 
 To run locally:
