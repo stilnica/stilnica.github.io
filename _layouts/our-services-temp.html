@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include head.html %}
+  <style>
+    .service-content {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    */*
+    text-shadow:
+      2px 2px 0 #000,
+      -2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000;
+      */
+  }
+  </style>
+</head>
+
+
+<body>
+  
+  {% include header.html %}
+  <!--
+  <div class="bg-filter" bis_skin_checked="1" style="
+  background-color: #272b28;
+  opacity: 70%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+"></div>
+-->
+  {% assign page_name = page.name | split:"." | first | downcase | strip  %}
+  <section class="heading-page header-text" id="top"
+    style="background:none;">
+    <div class="container" style="position: relative; top: -98px;">
+      <div class="row">
+        <div class="col-lg-12">
+          <!--<h6>Our services</h6>-->
+          <h2 style="text-transform: none; font-size: 50px;">
+            {% if page.relative_top_icon %}
+              {% assign img_top_style = "position: relative; top: " | append: page.relative_top_icon %}
+            {% endif %}
+            {% assign img_str_start = page.page_icon | slice: 0, 8 %}
+            {% if img_str_start == "<i class" %}
+              <span style="color:'#cfcfcf'; {{ img_top_style }}"></i>{{ page.page_icon }}</span><!-- #C4772B-->
+            {% else %}
+              <img src="{{page.page_icon}}"
+                style="height: 47px;
+                width: auto;
+                margin-right: 0px; {{ img_top_style }}" />
+            {% endif %}
+
+              
+              <span class="persontitle">
+                {% if page.page_title %}
+                  {{ page.page_title }}
+                {% else %}
+                  {{ page.text }}
+                {% endif %}
+              </span></h2>
+        </div>
+
+
+      </div>
+
+      <style>
+        .service-content p {
+          line-height: 29px;
+          margin: 30px 0px;
+          text-align: left;
+        }
+        .service-content li {
+          text-align: left;
+        }
+        .side_images{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          margin: 50px 0px;
+        }
+        .side_img_text
+        {
+          text-align: center;
+          font-style: italic;
+          font-size: 16px;
+        }
+
+        .side_images img {
+          height: 75px;
+        }
+      </style>
+      {% assign images_count = 0 %}
+      {% assign main_col_width = "col-10" %}
+      {% assign side_col_width = "" %}
+      {% if page.side_images %}
+        {% assign images_count = page.side_images | size %}
+        {% if images_count > 0 %}
+          {% assign main_col_width = "col-lg-9 col-md-12" %}
+          {% assign side_col_width = "col-lg-3 col-md-12" %}
+        {% endif %}
+      {% endif %}
+      <div class="row">
+        <!--<div class="{{ main_col_width }} mt-3 mb-3 mx-auto">-->
+          <div class="col-6 mx-auto">
+        
+          <div class="service-content {{page_name}}">
+            {{ page.content }}
+          </div>
+        </div>
+        <div class="col-6">
+            <div style="position: sticky; top: 100px; ">
+                <img style="border-radius: 10px" src="{{page.banner_image}}" />
+            </div>
+        </div>
+
+
+      </div>
+        <div style="margin-top: 40px;">
+        {% include contact-us-button.html %}
+        </div>
+    </div>
+    <div>
+        <!-- $('.article-post img').wrap(function(index) { return '<a href="'+$(this).attr('src')+'" data-lightbox="image-1"></a>'; }); -->
+        {% if images_count > 0 %}
+        <div class="side_images"><!--<div class="{{ side_col_width }} side_images">-->
+          {% for img in page.side_images %}
+          <div>
+            <div>
+          <a href="{{img.src}}" title="{{ img.text }}" data-lightbox="side_images">
+          <img src="{{img.src}}" />
+          </a>
+          </div>
+          <div class="side_img_text">{{ img.text }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+  </section>
+
+  <!--
+  <div class="container service-content">
+    <div class="row" id="more-about-service">
+      <div class="col-11 mx-auto">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+-->
+
+
+  {% include footer.html %}
+
+  {% include footscripts.html %}
+  <script>
+    //alert("{{page.url}}");
+  </script>
+</body>
+
+</html>

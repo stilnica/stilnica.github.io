@@ -95,7 +95,7 @@ defaults:
   - scope:
       type: "services"
     values:
-      layout: "our-services"
+      layout: "our-services-temp"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
