@@ -67,6 +67,8 @@ collections:
       - viet-tan.html
       - skippy.html
       - stories-with-horse.html
+      - pianist.html
+      - ane.html
 
   # testimonials
   testimonials:
@@ -82,6 +84,13 @@ collections:
       - editing.html
       - correcting.html
       - publishing
+
+  process:
+    output: true
+    order:
+      - how.html
+      - concerns.html
+
   
   # information in displayed charts
   chart_info:
@@ -95,7 +104,7 @@ defaults:
   - scope:
       type: "services"
     values:
-      layout: "our-services-temp"
+      layout: "our-services"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

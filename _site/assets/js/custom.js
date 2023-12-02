@@ -98,6 +98,8 @@
 			window.location.hash = target;
 			window.scrollTo({top: scroll_to, behavior: "smooth"});
 	    });
+
+		processScrollPosition();
 	});
 
 	// scroll event
@@ -122,7 +124,11 @@
 	}
 
 	$(window).scroll(function(e) {
+		processScrollPosition();
+    }); //end scroll event handler
 
+	function processScrollPosition()
+	{
 		var scrollPos = $(document).scrollTop();
 		var scrolled_to_the_bottom = ((window.innerHeight + (window.scrollY/10)) >= document.body.offsetHeight);
 
@@ -236,7 +242,7 @@
 				}
 			}
 	    });		
-    }); //end scroll event handler
+	}
 
 	$("#scrollup, #person-subheader-pic, #person-subheader-name").on("click", function(){
 		window.scrollTo({top: 0, behavior: "smooth"});

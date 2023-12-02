@@ -87,13 +87,24 @@
                             </ul>
                         </li>
 
-                        {% if current_url contains "/process" %}
+                        {% if current_url contains "/process/" %}
                             {% assign active_class="active" %}
                         {% else %}
                             {% assign active_class="" %}
                         {% endif %}                        
                         <li class="has-sub"><a class="{{active_class}}" href="javascript:void(0)">Как</a>
                             <ul class="sub-menu">
+                                {% for process in site.process %}
+                                    {% assign process_url = process.url | relative_url | remove : '.html' %}
+                                    {% if current_url == process_url %}
+                                    {% assign active_class="active" %}
+                                    {% else %}
+                                        {% assign active_class="" %}
+                                    {% endif %}
+                                    <li><a href="{{process_url}}" class="{{active_class}}">{{ process.text }}</a></li>
+                                {% endfor %}
+
+                                <!--
                                 {% if current_url contains "/process/how" %}
                                     {% assign active_class="active" %}
                                 {% else %}
@@ -106,6 +117,7 @@
                                     {% assign active_class="" %}
                                 {% endif %}                                  
                                 <li><a href="/process/concerns" class="{{ active_class }}">Някои съображения</a></li>
+                            -->
                             </ul>
                         </li>
 

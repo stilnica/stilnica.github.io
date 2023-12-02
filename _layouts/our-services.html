@@ -21,10 +21,7 @@
 </head>
 
 
-<body style="background: linear-gradient(
-  rgba(39, 43, 40, 0.5), 
-  rgba(39, 43, 40, 0.5)
-),url('{{page.banner_image}}'); background-repeat: no-repeat;  background-size: cover; background-position: top center; background-attachment: {{ page.bg_mode }}; color: white;">
+<body>
   
   {% include header.html %}
   <!--
@@ -110,31 +107,45 @@
       {% endif %}
       <div class="row">
         <!--<div class="{{ main_col_width }} mt-3 mb-3 mx-auto">-->
-          <div class="col-10 mt-3 mb-3 mx-auto">
+          <div class="col-lg-6 col-12 mx-auto gx-2">
         
           <div class="service-content {{page_name}}">
+            <img class="d-lg-none" style="border-radius: 10px; width:80%; margin-bottom: 40px;" src="{{page.banner_image}}" />
             {{ page.content }}
-          </div>
-        </div>
-        <!-- $('.article-post img').wrap(function(index) { return '<a href="'+$(this).attr('src')+'" data-lightbox="image-1"></a>'; }); -->
-        {% if images_count > 0 %}
-        <div class="side_images"><!--<div class="{{ side_col_width }} side_images">-->
-          {% for img in page.side_images %}
-          <div>
+
             <div>
-          <a href="{{img.src}}" title="{{ img.text }}" data-lightbox="side_images">
-          <img src="{{img.src}}" />
-          </a>
-          </div>
-          <div class="side_img_text">{{ img.text }}</div>
-          </div>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      {% include contact-us-button.html %}
+              <!-- $('.article-post img').wrap(function(index) { return '<a href="'+$(this).attr('src')+'" data-lightbox="image-1"></a>'; }); -->
+              {% if images_count > 0 %}
+              <div class="side_images"><!--<div class="{{ side_col_width }} side_images">-->
+                {% for img in page.side_images %}
+                <div>
+                  <div>
+                <a href="{{img.src}}" title="{{ img.text }}" data-lightbox="side_images">
+                <img src="{{img.src}}" />
+                </a>
+                </div>
+                <div class="side_img_text">{{ img.text }}</div>
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
       
+          </div>            
+          </div>
+        </div>
+        <div class="col-lg-6 d-lg-block d-none gx-2">
+            <div style="position: sticky; top: 100px; ">
+                <img class="d-lg-block" style="border-radius: 10px" src="{{page.banner_image}}" />
+            </div>
+        </div>
+
+
+      </div>
+        <div style="margin-top: 40px;">
+        {% include contact-us-button.html %}
+        </div>
     </div>
+
   </section>
 
   <!--
