@@ -482,7 +482,40 @@ header
   font-family: 'AlegreyaSansRegular', 'sans-serif';
   padding: 5px 0px;
   z-index: 200000;
+  font-size: 22px;
+  text-transform: uppercase; 
 }
+
+#main-menu .nav-link:not(.active) {
+  color: #cfcfcf;
+}
+
+#main-menu .dropdown-item:not(.active) {
+  font-weight: 400;  
+}
+
+#main-menu .dropdown-item:not(.active):hover {
+  padding-left: 29px;  
+}
+
+#main-menu .dropdown-item span {
+  margin-right: 5px;
+}
+
+#main-menu .dropdown-item.active {
+  font-weight: 700;  
+}
+
+#main-menu .dropdown-item {
+  font-size: 13px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  transition: all 0.3s ease;
+}
+
+
 #main-menu:has(.toggle input:checked) {
   z-index: 2000000;
 }
