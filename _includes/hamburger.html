@@ -1,0 +1,140 @@
+<style>
+.toggle {
+  display: block;
+  cursor: pointer;
+}
+.toggle input {
+  display: none;
+}
+.toggle input + div {
+  width: 20px;
+  height: 14px;
+  position: relative;
+}
+.toggle input + div div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 0.5s ease;
+}
+.toggle input + div div span {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.toggle input + div div span:first-child {
+  top: 0;
+}
+.toggle input + div div span:first-child:before, .toggle input + div div span:first-child:after {
+  top: 0;
+}
+.toggle input + div div span:last-child {
+  bottom: 0;
+}
+.toggle input + div div span:last-child:before, .toggle input + div div span:last-child:after {
+  bottom: 0;
+}
+.toggle input + div div span:before, .toggle input + div div span:after {
+  content: "";
+  display: block;
+  width: 47%;
+  height: 2px;
+  border-radius: 1px;
+  background: black;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.5s ease, border-radius 0.3s ease, background 0.4s ease;
+}
+.toggle input + div div span:before {
+  left: 0;
+  transform-origin: 0 50%;
+  transform: translate(1px, 0) scaleX(1.1);
+}
+.toggle input + div div span:after {
+  right: 0;
+  transform-origin: 100% 50%;
+  transform: translate(-1px, 0) scaleX(1.1);
+}
+.toggle input + div svg {
+  display: block;
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+  width: 44px;
+  height: 44px;
+  stroke-linecap: round;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -22px 0 0 -22px;
+  stroke-dasharray: 0 82.801 8 82.801;
+  stroke-dashoffset: 82.801;
+  transform-origin: 50% 50%;
+  -webkit-backface-visibility: hidden;
+  transform: scale(1);
+  transition: stroke-dashoffset 0.5s ease, stroke-dasharray 0.6s ease, transform 0.5s ease, stroke 0.4s ease;
+}
+.toggle input + div svg:nth-child(3) {
+  transform: rotate(180deg) scale(1);
+}
+.toggle input:checked + div div {
+  transform: rotate(90deg);
+}
+.toggle input:checked + div div span:before, .toggle input:checked + div div span:after {
+  background: #C4772B;
+}
+.toggle input:checked + div div span:first-child:before {
+  transform: rotate(45deg) translate(2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:first-child:after {
+  transform: rotate(-45deg) translate(-2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:before {
+  transform: rotate(-45deg) translate(2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:after {
+  transform: rotate(45deg) translate(-2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div svg {
+  stroke-dashoffset: 62;
+  stroke-dasharray: 0 82.801 62 82.801;
+  transform: rotate(90deg);
+  stroke: #C4772B;
+}
+.toggle input:checked + div svg:nth-child(3) {
+  transform: rotate(270deg);
+}
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active
+{
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+</style>
+
+<label class="toggle">
+    <input type="checkbox">
+    <div>
+        <div>
+            <span></span>
+            <span></span>
+        </div>
+        <svg>
+            <use xlink:href="#path">
+        </svg>
+        <svg>
+            <use xlink:href="#path">
+        </svg>
+    </div>
+</label>
+        
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" id="path">
+        <path d="M22,22 L2,22 C2,11 11,2 22,2 C33,2 42,11 42,22"></path>
+    </symbol>
+</svg>

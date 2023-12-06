@@ -1,0 +1,134 @@
+{% assign current_url = page.url | relative_url | remove : '.html' %}
+{% assign site_homepage = site.homepage | relative_url | remove : '.html' %}
+
+<!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
+<header id="main-menu" class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
+                    <a class="navbar-brand" href="/{{ site.homepage }}#top" data-bs-target="#top" style="padding: 0;">
+                        <div>
+                            <div class="nav-logo-container">
+                                <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
+                            </div>
+                            <div style="font-size: 13px;  height: 13px; line-height: 13px; font-weight: bold; letter-spacing: 4.55px;">
+                                БУТИК ЗА РЪКОПИСИ
+                            </div>
+                        </div>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    {% include hamburger.html %}
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav navbar-right ms-auto">
+
+                        
+                        {% if current_url=="" or current_url=="/" or current_url contains site_homepage %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="nav-item "><a href="/{{ site.homepage }}#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+
+                        <!-- people -->
+                        {% if current_url contains "/people/" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ active_class }}"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Кой
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
+                                {% for person in site.people %}
+                                {% assign person_url = person.url | relative_url | remove : '.html' %}
+                                {% if current_url == person_url %}
+                                {% assign active_class="active" %}
+                                {% else %}
+                                    {% assign active_class="" %}
+                                {% endif %}
+
+                                <a href="{{person.url | relative_url | remove : '.html'}}" class="dropdown-item {{ active_class }}">{{ person.firstname }} {{ person.lastname }}</a>
+                            {% endfor %}                                
+
+                            </div>
+                        </li>
+                        <!-- people -->
+
+                        <!-- services -->
+                        {% if current_url contains "/services/" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle  {{ active_class }}"  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Какво
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
+                                {% for service in site.services %}
+                                    {% assign service_url = service.url | relative_url | remove : '.html' %}
+                                    {% if current_url == service_url %}
+                                    {% assign active_class="active" %}
+                                    {% else %}
+                                        {% assign active_class="" %}
+                                    {% endif %}
+                                <a href="{{ service_url }}" class="dropdown-item {{ active_class }}">{{ service.text }}</a>
+                            {% endfor %}                                
+                            </div>
+                        </li>
+                        <!-- services-->
+
+                        <!-- process -->
+                        {% if current_url contains "/process/" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{ active_class }}"  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Как
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
+                                {% for process in site.process %}
+                                    {% assign process_url = process.url | relative_url | remove : '.html' %}
+                                    {% if current_url == process_url %}
+                                    {% assign active_class="active" %}
+                                    {% else %}
+                                        {% assign active_class="" %}
+                                    {% endif %}
+                                <a href="{{ process_url }}" class="dropdown-item {{ active_class }}">{{ process.text }}</a>
+                            {% endfor %}                                
+                            </div>
+                        </li>
+                        <!-- process -->
+
+                        <li class="nav-item {{ active_class }}"><a href="/{{ site.homepage }}#contact-us" data-bs-target="#contact-us"  class="nav-link">Къде</a></li>
+
+                        <!-- Literaturni -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Литературни
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a href="https://literaturnirazgovori.com/" target="_blank" class="dropdown-item"><span class="mastilnitsata mastilnitsata-sphere"></span> Литературни разговори</a>
+                                <a href="https://www.facebook.com/literaturnirazgovori/" target="_blank" class="dropdown-item"><span class="mastilnitsata mastilnitsata-facebook2"></span> Литературни разговори с АА</a>
+                            </div>
+                        </li>
+                        <!-- Literaturni -->
+                    </ul>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+  </header>
+  <a id="scrollup" href="javascript:void(0)">
+    <img src="/assets/images/scroll-up.png"  />
+  </a>

@@ -5,9 +5,9 @@
     {% include head.html %}
   </head>
 
-<body>
+<body style="position:relative;">
     
-{% include header.html %}
+{% include header-standard.html %}
 <div style="padding-top:100px;">
     {{ content }}
 </div>
@@ -15,6 +15,17 @@
 {% include footer.html %}
 
 {% include footscripts.html %}
+<script>
+    jQuery(document).ready(function($) {
+      "use strict";
+// for highlighting the items on the navigation bar
+const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+  target: '#main-menu',
+  offset: 300
+});
+    });
+
+</script>
 </body>
 
 </html>

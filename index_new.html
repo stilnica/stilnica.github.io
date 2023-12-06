@@ -472,7 +472,7 @@ layout: default
 </div>
 </section>
 -->
-<section class="contact-us" id="contact">
+<section class="contact-us" id="contact-us">
 <div class="container">
   <div class="row">
     <div class="col-lg-9 align-self-center">
@@ -515,8 +515,7 @@ layout: default
     margin: 0 auto;
 }
     </style>
-            <div id="contact-sending" style="
-    "><div bis_skin_checked="1" style="
+            <div id="contact-sending"><div bis_skin_checked="1" style="
     align-self: center;
     width: 100%;
     justify-content: center; display: flex;
@@ -611,8 +610,13 @@ layout: default
 </div>
 
 <script>
+
+
+
   function contact_submit()
   {
+
+
     var contactformSendingOverlay = document.getElementById("contact-sending");
     var contactformEmail = document.getElementById("contact-email");
     var contactformName = document.getElementById("contact-name");
@@ -634,13 +638,13 @@ layout: default
     }, 10)
     var sendobj = JSON.stringify(
     {
-    "from": {
-      "email": contactformEmail.value,
-      "name": contactformName.value
-    },
-    "subject": contactformSubject.value,
-    "body": contactformMessage.value
-}
+      "from": {
+        "email": contactformEmail.value,
+        "name": contactformName.value
+      },
+      "subject": contactformSubject.value,
+      "body": contactformMessage.value
+    }
 
 
 

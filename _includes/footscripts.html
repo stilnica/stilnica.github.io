@@ -2,14 +2,14 @@
   <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!--<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
 
-  <script src="assets/js/isotope.min.js"></script>
+  <!--<script src="assets/js/isotope.min.js"></script>-->
   <script src="/assets/js/lightbox.js"></script>
   <script src="/assets/js/tabs.js"></script>
   <script src="/assets/js/video.js"></script>
   <script src="/assets/js/slick-slider.js"></script>
-  <script src="/assets/js/custom.js"></script>  
+  <script src="/assets/js/custom.js"></script>
 
   <script src="/assets/js/lightslider/lightslider.min.js"></script>
   <script src="/assets/js/jquery.flipster.min.js"></script>
@@ -123,6 +123,13 @@
       $("#btn-testimonials-next").on("click", function(){
         testimonialsSlider.goToNextSlide();
       });
+
+    //collapse the hamburger menu, on scrollpy links
+    $('.nav-link[data-bs-target]').click(function(){
+      $("#navbarNavDropdown").removeClass("show");
+      $(".toggle input").prop("checked", false);
+    });
+
 
     });
 </script>

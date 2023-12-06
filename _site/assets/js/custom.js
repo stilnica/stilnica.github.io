@@ -7,7 +7,7 @@
 
 	// show/hide the "about person" navigation buttons, if the entire page is already visible
 	function show_hide_person_nav(){
-		var nav = $("#person-nav");
+		var nav = $("#person-buttons");
 		var hasVScroll = $(document).height() > $(window).height();
 		if(hasVScroll){
 			nav.fadeIn(200);
@@ -65,7 +65,7 @@
 		show_hide_person_nav();
 		
 	    $(document).on("scroll", onScroll);
-	    
+	    /*
 	    //smoothscroll
 	    $('.scroll-to-section a[href^="#"], a.scroll-to-section[href^="#"]').on('click', function (e) {
 	        var menuheight = 80; //$("#main-menu").height();
@@ -87,19 +87,12 @@
 	        menu = target;
 	       	var target_element = $(this.hash);
 			var scroll_to = target_element.offset().top + 5 - (menuheight + subheaderheight);
-			/*
-	        $('html, body').stop().animate({
-	            scrollTop: scroll_to
-	        }, 300 , 'swing', function () {
-	            window.location.hash = target;
-	            $(document).on("scroll", onScroll);
-	        });*/
+
 			console.log("Scrolling to " + target + " at " + scroll_to + " (menu height: " + menuheight + ", sub height: " + subheaderheight + ", elm top offset: " + target_element.offset().top + ")");
 			window.location.hash = target;
 			window.scrollTo({top: scroll_to, behavior: "smooth"});
 	    });
-
-		processScrollPosition();
+		*/
 	});
 
 	// scroll event
@@ -124,11 +117,7 @@
 	}
 
 	$(window).scroll(function(e) {
-		processScrollPosition();
-    }); //end scroll event handler
 
-	function processScrollPosition()
-	{
 		var scrollPos = $(document).scrollTop();
 		var scrolled_to_the_bottom = ((window.innerHeight + (window.scrollY/10)) >= document.body.offsetHeight);
 
@@ -153,6 +142,7 @@
         }
 
 		//---------------------------
+		/*
 		//highlight the subheader links as the page gets scrolled through
 		//https://dev.to/areeburrub/change-nav-link-s-style-as-you-scroll-4p62
 		const sections = $("section");
@@ -196,6 +186,7 @@
 				}
 			}
 		});
+		*/
 		//---------------------------
 
 		//show/hide the subheaders, if existing	  
@@ -242,7 +233,7 @@
 				}
 			}
 	    });		
-	}
+    }); //end scroll event handler
 
 	$("#scrollup, #person-subheader-pic, #person-subheader-name").on("click", function(){
 		window.scrollTo({top: 0, behavior: "smooth"});
@@ -282,6 +273,7 @@
 	// ---------------/events ---------------
 
 	// --------------- special item setup ---------------
+	/*
 	// accordion behaviour
 	const Accordion = {
 		settings: {
@@ -384,11 +376,11 @@
 		});
 	}
 
-
+	*/
 	// --------------- end special item setup ---------------
 
 	// --------------- Main menu behaviour ---------------
-	
+	/*
 	// Menu Dropdown Toggle
 	if($('.menu-trigger').length){
 		$(".menu-trigger").on('click', function() {	
@@ -430,7 +422,7 @@
             });
         });
     }
-
+	*/
 	// --------------- end Main menu behaviour ---------------
 
 })(window.jQuery);

@@ -56,157 +56,285 @@
 
 <body>
   
-    <!-- ***** Header Area Start ***** -->
-  <style>
-    .sub-menu a.active {
-        color: #C4772B !important;
-        font-weight: 800 !important;
-    }
-</style>
-  <header id="main-menu" class="header-area header-sticky" style="z-index:10000">
+  
+
+
+<!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
+<header id="main-menu" class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="main-nav"  id="pagetop">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/index_new.html" class="logo" style="top: -4px;">
-                        <div style="line-height: 88px;">
-                        <div class="nav-logo-container">
-                            <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
+
+                <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
+                    <a class="navbar-brand" href="/index_new.html#top" data-bs-target="#top" style="padding: 0;">
+                        <div>
+                            <div class="nav-logo-container">
+                                <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
+                            </div>
+                            <div style="font-size: 13px;  height: 13px; line-height: 13px; font-weight: bold; letter-spacing: 4.55px;">
+                                БУТИК ЗА РЪКОПИСИ
+                            </div>
                         </div>
-                        <div style="font-size: 13px;  height: 13px; line-height: 13px; font-weight: bold; letter-spacing: 4.55px;">
-                            БУТИК ЗА РЪКОПИСИ
-                        </div>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <style>
+.toggle {
+  display: block;
+  cursor: pointer;
+}
+.toggle input {
+  display: none;
+}
+.toggle input + div {
+  width: 20px;
+  height: 14px;
+  position: relative;
+}
+.toggle input + div div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 0.5s ease;
+}
+.toggle input + div div span {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.toggle input + div div span:first-child {
+  top: 0;
+}
+.toggle input + div div span:first-child:before, .toggle input + div div span:first-child:after {
+  top: 0;
+}
+.toggle input + div div span:last-child {
+  bottom: 0;
+}
+.toggle input + div div span:last-child:before, .toggle input + div div span:last-child:after {
+  bottom: 0;
+}
+.toggle input + div div span:before, .toggle input + div div span:after {
+  content: "";
+  display: block;
+  width: 47%;
+  height: 2px;
+  border-radius: 1px;
+  background: black;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.5s ease, border-radius 0.3s ease, background 0.4s ease;
+}
+.toggle input + div div span:before {
+  left: 0;
+  transform-origin: 0 50%;
+  transform: translate(1px, 0) scaleX(1.1);
+}
+.toggle input + div div span:after {
+  right: 0;
+  transform-origin: 100% 50%;
+  transform: translate(-1px, 0) scaleX(1.1);
+}
+.toggle input + div svg {
+  display: block;
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+  width: 44px;
+  height: 44px;
+  stroke-linecap: round;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -22px 0 0 -22px;
+  stroke-dasharray: 0 82.801 8 82.801;
+  stroke-dashoffset: 82.801;
+  transform-origin: 50% 50%;
+  -webkit-backface-visibility: hidden;
+  transform: scale(1);
+  transition: stroke-dashoffset 0.5s ease, stroke-dasharray 0.6s ease, transform 0.5s ease, stroke 0.4s ease;
+}
+.toggle input + div svg:nth-child(3) {
+  transform: rotate(180deg) scale(1);
+}
+.toggle input:checked + div div {
+  transform: rotate(90deg);
+}
+.toggle input:checked + div div span:before, .toggle input:checked + div div span:after {
+  background: #C4772B;
+}
+.toggle input:checked + div div span:first-child:before {
+  transform: rotate(45deg) translate(2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:first-child:after {
+  transform: rotate(-45deg) translate(-2.2px, -3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:before {
+  transform: rotate(-45deg) translate(2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div div span:last-child:after {
+  transform: rotate(45deg) translate(-2.2px, 3px) scaleX(1.05);
+}
+.toggle input:checked + div svg {
+  stroke-dashoffset: 62;
+  stroke-dasharray: 0 82.801 62 82.801;
+  transform: rotate(90deg);
+  stroke: #C4772B;
+}
+.toggle input:checked + div svg:nth-child(3) {
+  transform: rotate(270deg);
+}
+
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:active
+{
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+</style>
+
+<label class="toggle">
+    <input type="checkbox">
+    <div>
+        <div>
+            <span></span>
+            <span></span>
+        </div>
+        <svg>
+            <use xlink:href="#path">
+        </svg>
+        <svg>
+            <use xlink:href="#path">
+        </svg>
+    </div>
+</label>
+        
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" id="path">
+        <path d="M22,22 L2,22 C2,11 11,2 22,2 C33,2 42,11 42,22"></path>
+    </symbol>
+</svg>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav navbar-right ms-auto">
+
+                        
+                        
+                        <li class="nav-item "><a href="/index_new.html#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+
+                        <!-- people -->
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle "  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Кой
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
+                                
+                                
+                                
+
+                                <a href="/people/antonia" class="dropdown-item ">Антония Апостолова</a>
+                            
+                                
+                                
+
+                                <a href="/people/ninko" class="dropdown-item ">Нинко Кирилов</a>
+                            
+                                
+                                
+
+                                <a href="/people/tonya" class="dropdown-item ">Тоня Василева</a>
+                                                            
+
+                            </div>
+                        </li>
+                        <!-- people -->
+
+                        <!-- services -->
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle  active"  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Какво
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
+                                
+                                    
+                                    
+                                <a href="/services/consultation" class="dropdown-item ">Консултация</a>
+                            
+                                    
+                                    
+                                <a href="/services/reviewing" class="dropdown-item ">Рецензия</a>
+                            
+                                    
+                                    
+                                <a href="/services/rewriting" class="dropdown-item active">Рирайт</a>
+                            
+                                    
+                                    
+                                <a href="/services/editing" class="dropdown-item ">Редакция</a>
+                            
+                                    
+                                    
+                                <a href="/services/correcting" class="dropdown-item ">Корекция</a>
+                            
+                                    
+                                    
+                                <a href="/services/publishing" class="dropdown-item ">Публикуване</a>
+                                                            
+                            </div>
+                        </li>
+                        <!-- services-->
+
+                        <!-- process -->
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle "  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Как
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
+                                
+                                    
+                                    
+                                <a href="/process/how" class="dropdown-item ">Процесът</a>
+                            
+                                    
+                                    
+                                <a href="/process/concerns" class="dropdown-item ">Някои съображения</a>
+                                                            
+                            </div>
+                        </li>
+                        <!-- process -->
+
+                        <li class="nav-item "><a href="/index_new.html#contact-us" data-bs-target="#contact-us"  class="nav-link">Къде</a></li>
+
+                        <!-- Literaturni -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Литературни
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a href="https://literaturnirazgovori.com/" target="_blank" class="dropdown-item"><span class="mastilnitsata mastilnitsata-sphere"></span> Литературни разговори</a>
+                                <a href="https://www.facebook.com/literaturnirazgovori/" target="_blank" class="dropdown-item"><span class="mastilnitsata mastilnitsata-facebook2"></span> Литературни разговори с АА</a>
+                            </div>
+                        </li>
+                        <!-- Literaturni -->
+                    </ul>
                     </div>
-                        <!--Edu Meeting-->
-                        <!--<span class="mastilnitsata responsive-logo"></span>-->
-                        <!--<span class="mastilnitsata mastilnitsata-mastilnitsata-brand-inkpot"></span>-->
-                        <!--<span class="mastilnitsata mastilnitsata-new-m-logo"></span>-->
-                        <!--<div style="text-transform: none !important;
-                        text-shadow: -2px 9px 12px rgba(0, 0, 0, 0.81); font-weight: normal;">
-                            <span class="mastilnitsata mastilnitsata-hipster-m" style="font-size:60px;"></span>
-                            <span style="font-family: karano !important;
-                            font-size: 33px;
-                            position: relative;
-                            left: -6px;;
-                            top: 4px;">СТИЛница</span>
-                            </div>-->
-
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    
-                    
-
-                    <ul class="nav" style="font-family: karano">
-                        
-                        <li class="scroll-to-section"><a href="/index_new.html" class="">Начало</a></li>
- 
-                        
-                        <li class="has-sub"><a class="" href="javascript:void(0)">Кой</a>
-                            <ul class="sub-menu">
-                            
-                                
-                                
-
-                            <li><a href="/people/antonia" class="">Антония Апостолова</a></li>
-                            
-                                
-                                
-
-                            <li><a href="/people/ninko" class="">Нинко Кирилов</a></li>
-                            
-                                
-                                
-
-                            <li><a href="/people/tonya" class="">Тоня Василева</a></li>
-                            
-                            </ul>
-                        </li>
-
-                        
-                        <li class="has-sub"><a href="javascript:void(0)" class="active">Какво</a>
-                            <ul class="sub-menu">
-                                
-                                    
-                                    
-                                    <li><a href="/services/consultation" class="">Консултация</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/services/reviewing" class="">Рецензия</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/services/rewriting" class="active">Рирайт</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/services/editing" class="">Редакция</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/services/correcting" class="">Корекция</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/services/publishing" class="">Публикуване</a></li>
-                                
-                            </ul>
-                        </li>
-
-                                                
-                        <li class="has-sub"><a class="" href="javascript:void(0)">Как</a>
-                            <ul class="sub-menu">
-                                
-                                    
-                                    
-                                    <li><a href="/process/how" class="">Процесът</a></li>
-                                
-                                    
-                                    
-                                    <li><a href="/process/concerns" class="">Някои съображения</a></li>
-                                
-
-                                <!--
-                                                                  
-                                <li><a href="/process/how" class="">Процесът</a></li>
-                                                                  
-                                <li><a href="/process/concerns" class="">Някои съображения</a></li>
-                            -->
-                            </ul>
-                        </li>
-
-
-
-
-                        <!--<li class="scroll-to-section"><a href="#courses">Новини</a></li> -->
-
-                        <li class="scroll-to-section"><a href="/index_new.html#contact">Къде</a></li> 
-
-                        <li class="has-sub">
-                            <a href="javascript:void(0)">Литературни</a>
-                            <ul class="sub-menu">
-                                <li><a href="https://literaturnirazgovori.com/" target="_blank"><span class="mastilnitsata mastilnitsata-sphere"></span> Литературни разговори</a></li>
-                                <li><a href="https://www.facebook.com/literaturnirazgovori/" target="_blank"><span class="mastilnitsata mastilnitsata-facebook2"></span> Литературни разговори с АА</a></li>
-                            </ul>
-                        </li>                        
-                    </ul>        
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
                 </nav>
+
             </div>
         </div>
     </div>
-</header>
-
-<!-- ***** Header Area End ***** -->
-
-<a id="scrollup" href="javascript:void(0)">
-<img src="/assets/images/scroll-up.png"  />
-</a>
+  </header>
+  <a id="scrollup" href="javascript:void(0)">
+    <img src="/assets/images/scroll-up.png"  />
+  </a>
   <!--
   <div class="bg-filter" bis_skin_checked="1" style="
   background-color: #272b28;
@@ -220,7 +348,7 @@
 -->
   
   <section class="heading-page header-text" id="top"
-    style="background:none;">
+    style="background:none; padding-top: 195px;">
     <div class="container" style="position: relative; top: -98px;">
       <div class="row">
         <div class="col-lg-12">
@@ -398,9 +526,10 @@
 <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center">
-          Copyright © 2023 СТИЛница &amp; <a href="http://www.alonintheworld.com"
-            target="_blank">alonintheworld</a>, powered by <a href="https://www.literaturnirazgovori.com" target="_blank">Литературни Разговори</a>
+        <div class="col-12 text-center" style="
+        padding: 12px 0px;">
+          Copyright © 2023 СТИЛница, powered by <a href="http://www.alonintheworld.com"
+            target="_blank"><img style="width: 200px; margin: 0px 5px;" src="/assets/images/alon-in-the-world-animated-single-line.gif" /></a> <nobr>&amp; <a href="https://www.literaturnirazgovori.com" target="_blank">Литературни Разговори</a></nobr>
         </div><!--inner footer div-->
       </div><!--.row-->
     </div><!--.container-->
@@ -410,14 +539,14 @@
   <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!--<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
 
-  <script src="assets/js/isotope.min.js"></script>
+  <!--<script src="assets/js/isotope.min.js"></script>-->
   <script src="/assets/js/lightbox.js"></script>
   <script src="/assets/js/tabs.js"></script>
   <script src="/assets/js/video.js"></script>
   <script src="/assets/js/slick-slider.js"></script>
-  <script src="/assets/js/custom.js"></script>  
+  <script src="/assets/js/custom.js"></script>
 
   <script src="/assets/js/lightslider/lightslider.min.js"></script>
   <script src="/assets/js/jquery.flipster.min.js"></script>
@@ -531,6 +660,13 @@
       $("#btn-testimonials-next").on("click", function(){
         testimonialsSlider.goToNextSlide();
       });
+
+    //collapse the hamburger menu, on scrollpy links
+    $('.nav-link[data-bs-target]').click(function(){
+      $("#navbarNavDropdown").removeClass("show");
+      $(".toggle input").prop("checked", false);
+    });
+
 
     });
 </script>

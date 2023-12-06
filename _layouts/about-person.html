@@ -34,16 +34,53 @@ TODO:
 
 
 
-<body style="{{ body_bg }}; min-height: 100%;">
+<body style="{{ body_bg }}; min-height: 100%; position:relative;" >
   
-  {% include header.html %}
+  {% include header-standard.html %}
+
 
 
 <!-- person page: sticky person sub header-->
 {% if show_submenu %}
-<div class="container-fluid subheader" style="z-index: 11000; visibility:hidden;">
-  <div class="container" style="position:relative; top: -22px;">
-  <img id="person-subheader-pic" src="{{ page.person-pic }}" style="width: auto;z-index: 9000;height: 76px;border-radius: 50%;">
+<div class="container subheader">
+  <img src="{{ page.person-pic }}">
+</div>
+<div class="container-fluid subheader subheader-menu" style="    background-color: white;
+top: 86px;
+position: fixed;
+z-index: 100;
+/*
+padding-left: 145px;
+visibility: visible;
+opacity: 1;
+display: flex;
+flex-flow: wrap;
+align-items: center;
+place-content: center space-around;
+*/">
+<div class="container" style="display: flex;
+flex-direction: row;
+padding-left: 100px;">
+<div id="person-subheader-name" style="color:#C4772B;" id="person-fixed-bar">
+  {% if page.firstname %}
+    {{ page.firstname }}
+  {% endif%}
+  {% if page.lastname %}
+    <span id="subheader-last-name">{{ page.lastname }}</span>
+  {% endif%}  
+</div>
+
+<div id="person-fixed-bar" class="list-group">
+  <a class="list-group-item list-group-item-action" href="#moreabout">Биография</a>
+  <a class="list-group-item list-group-item-action" href="#booksof">Книги</a>
+  <a class="list-group-item list-group-item-action" href="#reviews">Отзиви</a>
+  <a class="list-group-item list-group-item-action" href="#interviews">Интервюта</a>
+</div>
+</div>
+</div>
+<!--
+<div class="container-fluid subheader" style="z-index: 11000; background-color: #f7f7f7; visibility:hidden;">
+  <div class="container" style="position:relative; top: -21px;">
     <span id="person-subheader-name" style="color:#C4772B;">
       {% if page.firstname %}
           {{ page.firstname }}
@@ -73,10 +110,13 @@ TODO:
     {% endif %}    
   </div>
 </div>
+-->
+<!---
 <div class="container-fluid subheader subheader-bg" style="z-index: 9000; background-color: #f7f7f7; height: 35px;">
   <div class="container" style="padding-left: 105px;">
 </div>
-</div> 
+-->
+</div > 
 {% endif %}
 <!-- / person page: sticky person sub header-->
 
@@ -106,43 +146,35 @@ TODO:
         </div>
       </div>
       {% if show_submenu %}
-      <div class="row" id="person-nav" style="display:none;">
+      <div class="row" id="person-buttons" style="display:none;">
         <div class="col-12 mt-0 mt-md-4">
           <span>
             <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
-              <div class="scroll-to-section">
                 <a href="#moreabout">
                   Биография
                 </a>
-              </div>
             </div>
           </span>
 
           {% if numofbooks > 0 %}
           <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
-            <div class="scroll-to-section">
               <a href="#booksof">
                 Книги
-              </a>
+                </a>
             </div>
-          </div>
           {% endif %}
           {% if numOfReviews > 0 %}
           <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
-            <div class="scroll-to-section">
               <a href="#reviews">
                 Отзиви
               </a>
-            </div>
           </div>
           {% endif %}
           {% if numOfInterviews > 0 %}
           <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
-            <div class="scroll-to-section">
               <a href="#interviews">
                 Интервюта
               </a>
-            </div>
           </div>
           {% endif %}          
 
@@ -179,7 +211,7 @@ TODO:
 
   {% if numOfReviews > 0 %}
   <section class="container-fluid jumpt-to-section" id="reviews"
-    style="background-color: #262a27">
+    style="background-color: #262a27;">
     <div class="row pt-3 pb-3">
       <div class="col-lg-8 mx-auto">
 
@@ -216,6 +248,32 @@ TODO:
   {% include footer.html %}
 
   {% include footscripts.html %}
+  <script>
+    
+    jQuery(document).ready(function($) {
+
+      // for highlighting the items on the navigation bar
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#person-fixed-bar',
+        offset: 120
+      });
+      
+      // for scrolling to the right place when clicked
+      var offset = 110;
+        $('#person-fixed-bar a, #person-buttons a').click(function(event) {
+            event.preventDefault();
+            console.log($($(this).attr('href'))[0]);
+            var elm = $($(this).attr('href'))[0];
+            var elementPosition = elm.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });            
+        });
+});
+
+  </script>
 </body>
 
 </html>
