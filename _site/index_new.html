@@ -43,6 +43,9 @@
 
 
 
+
+
+
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
@@ -214,7 +217,7 @@
                         <!-- people -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
@@ -242,7 +245,7 @@
                         <!-- services -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  "  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle  " href="#" id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Какво
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
@@ -278,7 +281,7 @@
                         <!-- process -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#" id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Как
                             </a>
                             <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
@@ -299,7 +302,7 @@
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Литературни
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -319,7 +322,7 @@
   <a id="scrollup" href="javascript:void(0)">
     <img src="/assets/images/scroll-up.png"  />
   </a>
-<div style="padding-top:100px;">
+<div class="main-content-wrapper" style="padding-top:100px;">
      <!-- ***** Main Banner Area Start ***** -->
  <section class="section main-banner" id="top" data-section="section1"> <!--style="height:700px; background-image: url('/assets/images/backgrounds/guillotine.jpg'); background-size: cover; background-repeat: no-repeat;"-->
   <video autoplay muted loop id="bg-video">
@@ -342,16 +345,11 @@
 
             
           </p>
-          <div class="main-button-red" bis_skin_checked="1">
-    <div class="scroll-to-section" bis_skin_checked="1">
-      <a href="/index_new.html#contact" bis_skin_checked="1" style="
-    font-size: 16px;
-">
+          <div class="main-button-red">
+    <div class="scroll-to-section">
+      <a href="/index_new.html#contact" style="font-size: 16px;">
       <!--<span class="contact-button-logo mastilnitsata mastilnitsata-mastilnitsata-logo-inkpot"></span>-->
-      <span class="mastilnitsata mastilnitsata-hipster-m" style="
-    font-size: 26px;
-    font-weight: bold;
-"></span>
+      <span class="mastilnitsata mastilnitsata-hipster-m" style="font-size: 26px;font-weight: bold;"></span>
       Пишете ни сега!
     </a></div>
 </div>
@@ -2072,15 +2070,16 @@ c_margin + (c_height /2)
     });
 </script>
 <script>
+    
     jQuery(document).ready(function($) {
       "use strict";
-// for highlighting the items on the navigation bar
-const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-  target: '#main-menu',
-  offset: 300
-});
+      // for highlighting the items on the navigation bar
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#main-menu',
+        offset: 300
+      });
     });
-
+    
 </script>
 </body>
 

@@ -38,35 +38,23 @@
 
 </head>
 
-<!--
-TODO:
-✅️ 1. Hide nav if the page is fully visible
-✅️ 2. If navigated to the bottom, highlight the last visible section
-✅️ 3. Fix the [object, object] on sliding to section
-✅️ 4. Give more buffer on section top, and navigate more accurately
-5. Fix the banner background image position
-✅️ 6. Layout of the subheader/buttons on small screens
-✅️ 7. Click on subheader scroll to top
-✅️ 8. Rearrange the custom.js
-✅️ 9. click-section scroll stop? (on small screens?)
-10. Tonya's page: button should appear only if scrollable, more than the menu height
--->
+
+
+
+
+<!-- Check if the person should have the background photo as the whole body (no additional sections, like books, reviews), or just on the top section -->
 
 
 
 
 
 
-
-
-
-
-
-
-
-<body style="; min-height: 100%; position:relative;" >
+<body class=" about-person-body" style=";" >
   
   
+
+
+
 
 
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
@@ -76,7 +64,7 @@ TODO:
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
-                    <a class="navbar-brand" href="/index_new.html#top" data-bs-target="#top" style="padding: 0;">
+                    <a class="navbar-brand" href="/index_new.html#top"  style="padding: 0;">
                         <div>
                             <div class="nav-logo-container">
                                 <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
@@ -235,12 +223,12 @@ TODO:
 
                         
                         
-                        <li class="nav-item "><a href="/index_new.html#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+                        <li class="nav-item "><a href="/index_new.html#top"  class="nav-link">Начало</a></li>
 
                         <!-- people -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle active" href="#"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
@@ -268,7 +256,7 @@ TODO:
                         <!-- services -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  "  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle  " href="#" id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Какво
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
@@ -304,7 +292,7 @@ TODO:
                         <!-- process -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#" id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Как
                             </a>
                             <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
@@ -325,7 +313,7 @@ TODO:
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Литературни
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -347,84 +335,30 @@ TODO:
   </a>
 
 
-
 <!-- person page: sticky person sub header-->
 
-<div class="container subheader">
+<div id="person-subheader-pic" class="container subheader">
   <img src="/assets/images/people/antonia-bw-2-sq.jpg">
 </div>
-<div class="container-fluid subheader subheader-menu" style="    background-color: white;
-top: 86px;
-position: fixed;
-z-index: 100;
-/*
-padding-left: 145px;
-visibility: visible;
-opacity: 1;
-display: flex;
-flex-flow: wrap;
-align-items: center;
-place-content: center space-around;
-*/">
-<div class="container" style="display: flex;
-flex-direction: row;
-padding-left: 100px;">
-<div id="person-subheader-name" style="color:#C4772B;" id="person-fixed-bar">
-  
-    Антония
-  
-  
-    <span id="subheader-last-name">Апостолова</span>
-    
-</div>
-
-<div id="person-fixed-bar" class="list-group">
-  <a class="list-group-item list-group-item-action" href="#moreabout">Биография</a>
-  <a class="list-group-item list-group-item-action" href="#booksof">Книги</a>
-  <a class="list-group-item list-group-item-action" href="#reviews">Отзиви</a>
-  <a class="list-group-item list-group-item-action" href="#interviews">Интервюта</a>
-</div>
-</div>
-</div>
-<!--
-<div class="container-fluid subheader" style="z-index: 11000; background-color: #f7f7f7; visibility:hidden;">
-  <div class="container" style="position:relative; top: -21px;">
-    <span id="person-subheader-name" style="color:#C4772B;">
+<div class="container-fluid subheader subheader-menu" style="background-color: white; top: 86px; position: fixed; z-index: 100;">
+  <div id="subheader-container" class="container">
+    <div id="person-subheader-name" style="color:#C4772B;" id="person-fixed-bar">
       
-          Антония
+        Антония
       
       
-          <span id="subheader-last-name">Апостолова</span>
-      
-    </span>
-    <span class="section-item scroll-to-section">
-      <a href="#moreabout">Биография</a>
-    </span>
-
-    
-    <span class="section-item scroll-to-section">
-      <a href="#booksof">Книги</a>
-    </span>
-    
-    
-    <span class="section-item scroll-to-section">
-      <a href="#reviews">Отзиви</a>
-    </span>
-    
-    
-    <span class="section-item scroll-to-section">
-      <a href="#interviews">Интервюта</a>
-    </span>
+        <span id="subheader-last-name">Апостолова</span>
         
+    </div>
+
+    <div id="person-fixed-bar" class="list-group">
+      <a class="list-group-item list-group-item-action" href="#moreabout">Биография</a>
+      <a class="list-group-item list-group-item-action" href="#booksof">Книги</a>
+      <a class="list-group-item list-group-item-action" href="#reviews">Отзиви</a>
+      <a class="list-group-item list-group-item-action" href="#interviews">Интервюта</a>
+    </div>
   </div>
 </div>
--->
-<!---
-<div class="container-fluid subheader subheader-bg" style="z-index: 9000; background-color: #f7f7f7; height: 35px;">
-  <div class="container" style="padding-left: 105px;">
-</div>
--->
-</div > 
 
 <!-- / person page: sticky person sub header-->
 
@@ -432,7 +366,7 @@ padding-left: 100px;">
   
   
   
-  <div style="background: linear-gradient(rgba(39, 43, 40, 0.6), rgba(39, 43, 40, 0.6)),url('/assets/images/people/antonia-bw-1.jpg'); background-repeat: no-repeat; background-size: cover; ">
+  <div class="about-person-section-bg" style="background: linear-gradient(rgba(39, 43, 40, 0.6), rgba(39, 43, 40, 0.6)),url('/assets/images/people/antonia-bw-1.jpg'); ">
   <section class="header-text" id="top"
     style="text-align: left; background: none; padding-top: 50px; padding-bottom: 50px;"><!--height:550px; margin-bottom: 50px;-->
     <div class="container" style="position: relative; padding-top: 143px;"><!--top: -98px;-->
@@ -452,7 +386,7 @@ padding-left: 100px;">
       </div>
       
       <div class="row" id="person-buttons" style="display:none;">
-        <div class="col-12 mt-0 mt-md-4">
+        <div id="person-buttons-container" class="col-12 mt-0 mt-md-4">
           <span>
             <div class="main-button-red" style="display:inline-block; float: left; margin-right: 10px;">
                 <a href="#moreabout">
@@ -489,7 +423,7 @@ padding-left: 100px;">
     </div>
   </section>
 
-  <section class="container-fluid jumpt-to-section" id="moreabout" style="padding-bottom: 30px; padding-top: 30px;">
+  <section class="container-fluid jumpt-to-section" id="moreabout" style="padding-bottom: 10px; padding-top: 10px;">
     <div class="row" style="color: white;">
       <div class="col-lg-8 mx-auto" style="line-height: 1.8;">
         <!--<strong style="font-size:32px;">Антония Апостолова</strong><span style="margin-left:10px;">е:</span>-->
@@ -1932,25 +1866,15 @@ padding-left: 100px;">
     
     jQuery(document).ready(function($) {
 
+      if($("#person-fixed-bar").length > 0){
       // for highlighting the items on the navigation bar
       const scrollSpy = new bootstrap.ScrollSpy(document.body, {
         target: '#person-fixed-bar',
         offset: 120
       });
+    }
       
-      // for scrolling to the right place when clicked
-      var offset = 110;
-        $('#person-fixed-bar a, #person-buttons a').click(function(event) {
-            event.preventDefault();
-            console.log($($(this).attr('href'))[0]);
-            var elm = $($(this).attr('href'))[0];
-            var elementPosition = elm.getBoundingClientRect().top;
-            var offsetPosition = elementPosition + window.pageYOffset - offset;
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth"
-            });            
-        });
+
 });
 
   </script>

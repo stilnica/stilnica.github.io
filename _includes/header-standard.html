@@ -1,6 +1,11 @@
 {% assign current_url = page.url | relative_url | remove : '.html' %}
+{% assign current_url_hashes = current_url | split: "#" %}
+{% assign current_url = current_url_hashes[0] %}
 {% assign site_homepage = site.homepage | relative_url | remove : '.html' %}
-
+{% assign home_with_slash = "/" | append: site.homepage %}
+{% if current_url == site_homepage or current_url == "" or current_url == "/" or current_url == home_with_slash %}
+    {% assign top_ref = 'data-bs-target="#top"' %}
+{% endif %}
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
@@ -8,7 +13,7 @@
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
-                    <a class="navbar-brand" href="/{{ site.homepage }}#top" data-bs-target="#top" style="padding: 0;">
+                    <a class="navbar-brand" href="/{{ site.homepage }}#top" {{ top_ref }} style="padding: 0;">
                         <div>
                             <div class="nav-logo-container">
                                 <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
@@ -32,7 +37,7 @@
                         {% else %}
                             {% assign active_class="" %}
                         {% endif %}
-                        <li class="nav-item "><a href="/{{ site.homepage }}#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+                        <li class="nav-item "><a href="/{{ site.homepage }}#top" {{ top_ref }} class="nav-link">Начало</a></li>
 
                         <!-- people -->
                         {% if current_url contains "/people/" %}
@@ -41,19 +46,19 @@
                             {% assign active_class="" %}
                         {% endif %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{ active_class }}"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle {{ active_class }}" href="#"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
                                 {% for person in site.people %}
                                 {% assign person_url = person.url | relative_url | remove : '.html' %}
                                 {% if current_url == person_url %}
-                                {% assign active_class="active" %}
+                                {% assign person_active_class="active" %}
                                 {% else %}
-                                    {% assign active_class="" %}
+                                    {% assign person_active_class="" %}
                                 {% endif %}
 
-                                <a href="{{person.url | relative_url | remove : '.html'}}" class="dropdown-item {{ active_class }}">{{ person.firstname }} {{ person.lastname }}</a>
+                                <a href="{{person.url | relative_url | remove : '.html'}}" class="dropdown-item {{ person_active_class }}">{{ person.firstname }} {{ person.lastname }}</a>
                             {% endfor %}                                
 
                             </div>
@@ -67,7 +72,7 @@
                             {% assign active_class="" %}
                         {% endif %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  {{ active_class }}"  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle  {{ active_class }}" href="#" id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Какво
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
@@ -91,7 +96,7 @@
                             {% assign active_class="" %}
                         {% endif %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{ active_class }}"  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle {{ active_class }}" href="#" id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Как
                             </a>
                             <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
@@ -112,7 +117,7 @@
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Литературни
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

@@ -8,7 +8,7 @@
 <body style="position:relative;">
     
 {% include header-standard.html %}
-<div style="padding-top:100px;">
+<div class="main-content-wrapper" style="padding-top:100px;">
     {{ content }}
 </div>
 
@@ -16,15 +16,16 @@
 
 {% include footscripts.html %}
 <script>
+    {% if page.scrollspy != false %}
     jQuery(document).ready(function($) {
       "use strict";
-// for highlighting the items on the navigation bar
-const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-  target: '#main-menu',
-  offset: 300
-});
+      // for highlighting the items on the navigation bar
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#main-menu',
+        offset: 300
+      });
     });
-
+    {% endif %}
 </script>
 </body>
 

@@ -1,25 +1,73 @@
 ---
 permalink: /404.html
 layout: default
+scrollspy: false
 ---
 
 <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
+
+.main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    padding-top: 0px !important;
+}
+.not-found {
+  display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    background-image: url(/assets/images/backgrounds/old-documents.jpg);
+    background-size: cover;
+    background-position: center;
+    text-shadow:  0 0 1.2em black, 0 0 1.2em black, 0 0 1.2em black;
+    color: white;
+}
+
+h1 {
+
+  font-size: 5em;
+}
+
+.home-button {
+  margin-top: 33px;
+}
+.home-button a {
+  font-size: 22px !important; 
+  color:white !important;
+  font-size: 20px !important; 
+  color: white !important;
+  text-shadow: 0 0 black !important;
+  font-weight: 900 !important;
+  text-transform: none !important;
+}
+
+.home-button i {
+  margin-right: 10px;
+}
 </style>
 
-<div class="container">
-  <h1>404</h1>
+<div class="container-fluid not-found">
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <span style="font-size: 111px;" class="mastilnitsata mastilnitsata-hipster-m"></span><br/>
+  <h1 style="position:relative; top: -36px;">404</h1>
+
+  <p><strong>Страницата не е намерена :(</strong></p>
+
+  <p>
+    <div class="main-button-red home-button">
+      <a class="" href="/{{ site.homepage }}">
+        <i class="fa-solid fa-house-chimney"></i>
+        Към началото!
+      </a>
+    </div>
+  </p>
 </div>

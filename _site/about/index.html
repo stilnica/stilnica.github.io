@@ -43,6 +43,9 @@
 
 
 
+
+
+
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
@@ -50,7 +53,7 @@
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
-                    <a class="navbar-brand" href="/index_new.html#top" data-bs-target="#top" style="padding: 0;">
+                    <a class="navbar-brand" href="/index_new.html#top"  style="padding: 0;">
                         <div>
                             <div class="nav-logo-container">
                                 <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
@@ -209,12 +212,12 @@
 
                         
                         
-                        <li class="nav-item "><a href="/index_new.html#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+                        <li class="nav-item "><a href="/index_new.html#top"  class="nav-link">Начало</a></li>
 
                         <!-- people -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
@@ -242,7 +245,7 @@
                         <!-- services -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  "  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle  " href="#" id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Какво
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
@@ -278,7 +281,7 @@
                         <!-- process -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#" id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Как
                             </a>
                             <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
@@ -299,7 +302,7 @@
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Литературни
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -319,7 +322,7 @@
   <a id="scrollup" href="javascript:void(0)">
     <img src="/assets/images/scroll-up.png"  />
   </a>
-<div style="padding-top:100px;">
+<div class="main-content-wrapper" style="padding-top:100px;">
     <article class="post">
 
   <header class="post-header">
@@ -498,15 +501,16 @@
     });
 </script>
 <script>
+    
     jQuery(document).ready(function($) {
       "use strict";
-// for highlighting the items on the navigation bar
-const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-  target: '#main-menu',
-  offset: 300
-});
+      // for highlighting the items on the navigation bar
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#main-menu',
+        offset: 300
+      });
     });
-
+    
 </script>
 </body>
 

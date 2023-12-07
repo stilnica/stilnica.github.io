@@ -43,6 +43,9 @@
 
 
 
+
+
+
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
@@ -50,7 +53,7 @@
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
-                    <a class="navbar-brand" href="/index_new.html#top" data-bs-target="#top" style="padding: 0;">
+                    <a class="navbar-brand" href="/index_new.html#top"  style="padding: 0;">
                         <div>
                             <div class="nav-logo-container">
                                 <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
@@ -209,12 +212,12 @@
 
                         
                         
-                        <li class="nav-item "><a href="/index_new.html#top" data-bs-target="#top" class="nav-link">Начало</a></li>
+                        <li class="nav-item "><a href="/index_new.html#top"  class="nav-link">Начало</a></li>
 
                         <!-- people -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#"  id="whoDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
@@ -242,7 +245,7 @@
                         <!-- services -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle  "  id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle  " href="#" id="whatDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Какво
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whatDropdownMenuLink">
@@ -278,7 +281,7 @@
                         <!-- process -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle "  id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle " href="#" id="howDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Как
                             </a>
                             <div class="dropdown-menu" aria-labelledby="howDropdownMenuLink">
@@ -299,7 +302,7 @@
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Литературни
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -319,26 +322,73 @@
   <a id="scrollup" href="javascript:void(0)">
     <img src="/assets/images/scroll-up.png"  />
   </a>
-<div style="padding-top:100px;">
+<div class="main-content-wrapper" style="padding-top:100px;">
     <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
+
+.main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    padding-top: 0px !important;
+}
+.not-found {
+  display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    background-image: url(/assets/images/backgrounds/old-documents.jpg);
+    background-size: cover;
+    background-position: center;
+    text-shadow:  0 0 1.2em black, 0 0 1.2em black, 0 0 1.2em black;
+    color: white;
+}
+
+h1 {
+
+  font-size: 5em;
+}
+
+.home-button {
+  margin-top: 33px;
+}
+.home-button a {
+  font-size: 22px !important; 
+  color:white !important;
+  font-size: 20px !important; 
+  color: white !important;
+  text-shadow: 0 0 black !important;
+  font-weight: 900 !important;
+  text-transform: none !important;
+}
+
+.home-button i {
+  margin-right: 10px;
+}
 </style>
 
-<div class="container">
-  <h1>404</h1>
+<div class="container-fluid not-found">
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <span style="font-size: 111px;" class="mastilnitsata mastilnitsata-hipster-m"></span><br/>
+  <h1 style="position:relative; top: -36px;">404</h1>
+
+  <p><strong>Страницата не е намерена :(</strong></p>
+
+  <p>
+    <div class="main-button-red home-button">
+      <a class="" href="/index_new.html">
+        <i class="fa-solid fa-house-chimney"></i>
+        Към началото!
+      </a>
+    </div>
+  </p>
 </div>
 
 </div>
@@ -497,15 +547,7 @@
     });
 </script>
 <script>
-    jQuery(document).ready(function($) {
-      "use strict";
-// for highlighting the items on the navigation bar
-const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-  target: '#main-menu',
-  offset: 300
-});
-    });
-
+    
 </script>
 </body>
 

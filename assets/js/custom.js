@@ -232,7 +232,20 @@
 					//}
 				}
 			}
-	    });		
+	    });
+		
+      // for scrolling to the right place when clicked
+      var offset = 110;
+        $('.scroll-to-section, #person-fixed-bar a, #person-buttons a').click(function(event) {
+            event.preventDefault();
+            var elm = $($(this).attr('href'))[0];
+            var elementPosition = elm.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });            
+        });		
     }); //end scroll event handler
 
 	$("#scrollup, #person-subheader-pic, #person-subheader-name").on("click", function(){
