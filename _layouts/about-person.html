@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" style="height: 100%;">
-
-<head>
-  {% include head.html %}
-</head>
-
 {% assign numofbooks = page.books-of | size %}
 {% assign numOfReviews = page.review_links | size %}
 {% assign numOfInterviews = page.interview_links | size %}
@@ -19,6 +12,13 @@
   {% assign body_bg = person_bg %}
   {% assign body_class = "about-person-full-body-bg" %}
 {% endif %}
+
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; {% if show_submenu %}scroll-padding-top: 116px;{% endif %}">
+
+<head>
+  {% include head.html %}
+</head>
 
 <body class="{{ body_class }} about-person-body" style="{{ body_bg }};" >
   

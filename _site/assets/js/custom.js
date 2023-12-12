@@ -64,7 +64,7 @@
 		//check the status of the vertical scroll on page load
 		show_hide_person_nav();
 		
-	    $(document).on("scroll", onScroll);
+	    //$(document).on("scroll", onScroll);
 	    /*
 	    //smoothscroll
 	    $('.scroll-to-section a[href^="#"], a.scroll-to-section[href^="#"]').on('click', function (e) {
@@ -94,7 +94,7 @@
 	    });
 		*/
 	});
-
+	/*
 	// scroll event
 	function onScroll(event){
 	    var scrollPos = $(document).scrollTop();
@@ -115,12 +115,13 @@
 			}
 	    });
 	}
+	*/
 
 	$(window).scroll(function(e) {
 
 		var scrollPos = $(document).scrollTop();
 		var scrolled_to_the_bottom = ((window.innerHeight + (window.scrollY/10)) >= document.body.offsetHeight);
-
+/*
         if (visible($('.count-digit'))) {
             if ($('.count-digit').hasClass('counter-loaded')) return;
             $('.count-digit').addClass('counter-loaded');
@@ -140,7 +141,7 @@
                 });
             });
         }
-
+*/
 		//---------------------------
 		/*
 		//highlight the subheader links as the page gets scrolled through
@@ -199,13 +200,13 @@
 			$("header").addClass("background-header");
 			gobackup.fadeIn(500);
 			//subheader.fadeIn(200);
-			console.log("SHOWING....")
+			//console.log("SHOWING....")
 			subheader.css({visibility:"visible", opacity: 0.0}).animate({opacity: 1.0},200);
 		} else {
 			$("header").removeClass("background-header");
 			gobackup.fadeOut(500);
 			//subheader.fadeOut(200);
-			console.log("HIDING....");
+			//console.log("HIDING....");
 			subheader.css("visibility","hidden");
 			/*
 			subheader.animate({opacity: 0.0}, 200, function(){
@@ -214,6 +215,7 @@
 		}
 
 		// add/remove "active" class to all relevant links
+		/*
 	    $('.nav a').each(function () {
 	        var currLink = $(this);
 			var href = currLink.attr("href");
@@ -232,8 +234,8 @@
 					//}
 				}
 			}
-	    });
-		
+	    });*/
+	/*
       // for scrolling to the right place when clicked
       var offset = 110;
         $('.scroll-to-section, #person-fixed-bar a, #person-buttons a').click(function(event) {
@@ -245,7 +247,7 @@
               top: offsetPosition,
               behavior: "smooth"
             });            
-        });		
+        });*/
     }); //end scroll event handler
 
 	$("#scrollup, #person-subheader-pic, #person-subheader-name").on("click", function(){

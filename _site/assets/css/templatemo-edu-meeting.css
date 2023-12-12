@@ -71,6 +71,11 @@ font & reset css
 NEW STUFF
 ==============================================
 */
+
+html {
+	scroll-padding-top: 86px;
+}
+
 body {
   min-height: 100vh;
   display: flex;
