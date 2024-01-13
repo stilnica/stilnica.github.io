@@ -1,0 +1,51 @@
+<style>
+  .event-card .card-text {
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.event-card {
+  border: 1px solid white;
+  border-radius: 11px;
+  margin: 30px;
+  color: white;
+  font-weight: normal;
+}
+
+.event-card h5 {
+  font-weight: 700;
+}
+
+.event-card .card-text {
+  margin: 14px 22px;
+}
+
+.event-card .btn {
+  margin: 14px 0;
+}
+
+.event-card .event-date {
+  font-size: 15px;
+}
+
+</style>
+{% assign months_bg = "Януари,Февруари,Март,Април,Май,Юни,Юли,Август,Септември,Октомври,Ноември,Декември" | split: "," %}
+{% assign day =  include.event.start_date | date: "%d" %}
+{% assign month =  include.event.start_date | date: "%m" | minus: 1 %}
+{% assign year =  include.event.start_date | date: "%Y" %}
+{% assign datestr = day | append: " " | append: months_bg[month] | append: ", " | append: year %}
+
+<a href="{{ include.event.link }}">
+  <div class="card bg-dark event-card">
+    <img class="card-img-top" src="{{ include.event.image }}" alt="Card image cap" />
+    <div class="card-body">
+      <h5 class="card-title">{{ include.event.title }}</h5>
+      <div class="event-date">{{ datestr }}</div>
+      <p class="card-text">{{ include.event.content }}</p>
+      <div class="btn btn-primary">See more!</div>
+    </div>
+  </div>
+</a>

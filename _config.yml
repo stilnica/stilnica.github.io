@@ -73,6 +73,9 @@ collections:
   # testimonials
   testimonials:
     output: false
+
+  events:
+    output: true
   
   # our services
   services:
@@ -105,6 +108,11 @@ defaults:
       type: "services"
     values:
       layout: "our-services"
+  - scope:
+      type: "events"
+    values:
+      layout: "our-services"
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.

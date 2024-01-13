@@ -1,5 +1,45 @@
 ---
 layout: our-services
+page_icon: "/assets/images/courses/student.png"
 banner_image: "/assets/images/backgrounds/studying-together.png" 
+text: "Our courses and events"
 ---
-info
+<p>На тази страница ще ви информираме за всички предстоящи онлайн и присъствени курсове, работилници, мастър класове и срещи с писатели. Можете да се абонирате и да получавате такава информация тук.</p>
+
+
+{% assign today_date = "now" | date: '%s' | plus: 1 %}
+
+{% assign past_events = "" | split: "" %}
+{% assign future_events = "" | split: "" %}
+{% assign all_events = site.events | where: "visible", true %}
+{% for event in all_events %}
+    {% assign event_date = event.start_date | date: '%s' | times: 1  %}
+    {% if event_date >=  today_date %}
+        {% assign future_events = future_events | push: event %}
+    {% else %}
+        {% assign past_events = past_events | push: event %}
+    {% endif %}
+{% endfor %}
+{% assign future_events_count = future_events | size %}
+{% assign past_events_count = past_events | size %}
+
+
+<h2>Upcoming events</h2>
+
+{% if future_events_count > 0 %}
+    {% for e in future_events %}
+        {% include event_info.html event=e %}
+    {% endfor %}
+{% else %}
+    <div>No future events</div>
+{% endif %}
+
+<h2>Past events</h2>
+
+{% if past_events_count > 0 %}
+    {% for e in past_events %}
+        {% include event_info.html event=e %}
+    {% endfor %}
+{% else %}
+    <div>No past events</div>
+{% endif %}
