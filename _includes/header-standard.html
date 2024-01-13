@@ -50,7 +50,8 @@
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
-                                {% for person in site.people %}
+                                {% assign people = site.people | where: "visible", true %}
+                                {% for person in people %}
                                 {% assign person_url = person.url | relative_url | remove : '.html' %}
                                 {% if current_url == person_url %}
                                 {% assign person_active_class="active" %}
