@@ -5,7 +5,11 @@
 {% assign home_with_slash = "/" | append: site.homepage %}
 {% if current_url == site_homepage or current_url == "" or current_url == "/" or current_url == home_with_slash %}
     {% assign top_ref = 'data-bs-target="#top"' %}
+    {% assign homepage_active_class="active" %}
+{% else %}
+    {% assign homepage_active_class="" %}
 {% endif %}
+
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
@@ -13,7 +17,7 @@
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
-                    <a class="navbar-brand" href="/{{ site.homepage }}#top" {{ top_ref }} style="padding: 0;">
+                    <a class="navbar-brand {{homepage_active_class}}" href="/{{ site.homepage }}#top" {{ top_ref }} style="padding: 0;">
                         <div>
                             <div class="nav-logo-container">
                                 <span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>
@@ -31,13 +35,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav navbar-right ms-auto">
 
-                        
-                        {% if current_url=="" or current_url=="/" or current_url contains site_homepage %}
-                            {% assign active_class="active" %}
-                        {% else %}
-                            {% assign active_class="" %}
-                        {% endif %}
-                        <li class="nav-item "><a href="/{{ site.homepage }}#top" {{ top_ref }} class="nav-link">Начало</a></li>
+                        <!--<li class="nav-item "><a href="/{{ site.homepage }}#top" {{ top_ref }} class="nav-link">Начало</a></li>-->
 
                         <!-- people -->
                         {% if current_url contains "/people/" %}
@@ -114,7 +112,18 @@
                         </li>
                         <!-- process -->
 
-                        <li class="nav-item {{ active_class }}"><a href="/{{ site.homepage }}#contact-us" data-bs-target="#contact-us"  class="nav-link">Къде</a></li>
+                        <!-- when? (events/courses) -->
+                        {% if current_url contains "/when" %}
+                            {% assign active_class="active" %}
+                        {% else %}
+                            {% assign active_class="" %}
+                        {% endif %}
+                        
+                        
+                        <li class="nav-item {{ active_class }}"><a href="/when" class="nav-link">Кога</a></li>
+
+                        <!-- contact (where)-->
+                        <li class="nav-item"><a href="/{{ site.homepage }}#contact-us" data-bs-target="#contact-us"  class="nav-link">Къде</a></li>
 
                         <!-- Literaturni -->
                         <li class="nav-item dropdown">

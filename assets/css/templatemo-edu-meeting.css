@@ -555,6 +555,10 @@ header
   background-color: #cfcfcf!important;
 }
 
+.navbar-brand.active, .navbar-brand.active:hover {
+  color: #C4772B;
+}
+
 #main-menu.background-header .nav-item a:not(.active), 
 #main-menu.background-header .navbar-brand {
   color: #1e1e1e;
