@@ -237,8 +237,8 @@ body {
   list-style: none;
 }
 
-.service-content.consultation ul li,
-.service-content.editing ul li {
+.service-content /*.consultation*/ ul li /*,
+.service-content.editing ul li*/ {
   margin: 1em;
   margin-left: 3em;
 }
@@ -260,6 +260,9 @@ body {
   content: "\e19b";
 }
 
+.service-content.publishing ul li::before {
+  content: "\f57b";
+}
 
 /* 
 ---------------------------------------------
@@ -1128,6 +1131,10 @@ section.apply-now .item p {
 .service-content h3 {
   font-size: 25px;
   font-weight: bold;
+}
+
+.service-content .highlight {
+  color: #C4772B;
 }
 
 /* 
