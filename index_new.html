@@ -70,6 +70,54 @@ layout: default
 </section>
 <!--/Our services chart -->
 
+
+
+<style>
+    .my-flipster img {
+        height: 350px;
+    }
+    .flipster__button svg {
+      stroke: white;
+    }
+</style>
+<!-- SEE ALSO, FLIPSTER: http://brokensquare.com/Code/jquery-flipster/demo/-->
+
+<!-- Books our team worked on -->
+<section id="books-by-our-team" class="books-by-our-team" style="background: linear-gradient(180deg, rgba(56,56,59,1) 0%, rgba(109,110,118,1) 92%);"> 
+  <div class="container">
+    <div class="row">
+      <div class="col-12 chart-container">
+        <div class="section-heading" bis_skin_checked="1" style="
+        display: flex;
+        justify-content: center;
+    ">
+          <h2 style="
+        /* display: inline-flex; */
+        /* justify-content: center; */
+        margin: 40px 0px 40px 0px;
+    ">КНИГИ, ЗА КОИТО СМЕ ОТГОВОРНИ</h2>
+        </div>
+        
+
+
+        <div>
+          <div class="my-flipster">
+            <ul>
+              {% assign bookz = site.books-by-us | where: "visible", true %}
+              {% for book in bookz %}<!--visible: true-->
+                <li><a href="{{ book.link }}" target="_blank"><img src="/assets/images/books-by-us/{{ book.cover }}" /></a></li>
+                {% endfor %}
+                </ul>
+          </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/Books our team worked on -->
+
+
 <style>
   .lightslider-btn-container {
     position: relative; 
@@ -191,50 +239,6 @@ layout: default
 </div>
 </section>
 
-<style>
-    .my-flipster img {
-        height: 350px;
-    }
-    .flipster__button svg {
-      stroke: white;
-    }
-</style>
-<!-- SEE ALSO, FLIPSTER: http://brokensquare.com/Code/jquery-flipster/demo/-->
-
-<!-- Books our team worked on -->
-<section id="books-by-our-team" class="books-by-our-team" style="background: linear-gradient(180deg, rgba(56,56,59,1) 0%, rgba(109,110,118,1) 92%);"> 
-  <div class="container">
-    <div class="row">
-      <div class="col-12 chart-container">
-        <div class="section-heading" bis_skin_checked="1" style="
-        display: flex;
-        justify-content: center;
-    ">
-          <h2 style="
-        /* display: inline-flex; */
-        /* justify-content: center; */
-        margin: 40px 0px 40px 0px;
-    ">КНИГИ, ЗА КОИТО СМЕ ОТГОВОРНИ</h2>
-        </div>
-        
-
-
-        <div>
-          <div class="my-flipster">
-            <ul>
-              {% assign bookz = site.books-by-us | where: "visible", true %}
-              {% for book in bookz %}<!--visible: true-->
-                <li><a href="{{ book.link }}" target="_blank"><img src="/assets/images/books-by-us/{{ book.cover }}" /></a></li>
-                {% endfor %}
-                </ul>
-          </div>
-
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--/Books our team worked on -->
 <!--
 <section class="upcoming-meetings" id="meetings">
 <div class="container">

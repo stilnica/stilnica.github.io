@@ -229,14 +229,14 @@ c_margin + (c_height /2)
         texts.push({
             horizontal: {
                 x: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
-                y: ("{{text.position}}".trim().toLowerCase()=="top")? c_margin/3 : c_height * 1.5 + 2* c_margin/3,
-                text: "{{text.text}}"
+                y: ("{{text.position}}".trim().toLowerCase()=="top")? c_margin/3 : c_height * 1.5 + 2* c_margin/3
             },
             vertical: {
                 x: ("{{text.position}}".trim().toLowerCase()=="top")? c_height * 1.5 + 2* c_margin/3: c_margin/3,
                 y: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
-                text: "{{text.text}}"
-            }
+            },
+            text: "{{text.text}}",
+            url: "{{ text.url }}"
         })      
     {% endfor %}
     
@@ -269,6 +269,7 @@ c_margin + (c_height /2)
         {
             window.location.href = activelink;
         }
+        console.log("click " + activelink);
     });
 
     function drawTooltip(text, px_height, text_color, fill_color, border_color)
@@ -338,7 +339,7 @@ c_margin + (c_height /2)
 
     function drawChart(){
         activelink = "";
-        var cursorInPath = -1;
+        var cursorInPath = -1, cursorOnTextLink = false;
         ctx.clearRect(0,0, canvas.width, canvas.height);
         canvas.width  = canvas.offsetWidth;
         //var drawpaths = paths;
@@ -532,30 +533,64 @@ c_margin + (c_height /2)
         {
             ctx.font = "15px Arial";
             ctx.textAlign = "center";
+            ctx.fillStyle = 'white';
+
+            var m = ctx.measureText(texts[i][text_direction].text);
+            var 
+                textxl = texts[i][text_direction].x - (m.width * 1.5),                      // left
+                textxr = textxl + (m.width * 3),                                            // right
+                textyt = texts[i][text_direction].y - m.actualBoundingBoxAscent,            // top
+                textyb = texts[i][text_direction].y + Math.abs(m.actualBoundingBoxAscent) + // bottom
+                            Math.abs(m.actualBoundingBoxDescent);
 
             if(vertical_view){
+                //ctx.strokeRect(texts[i][text_direction].x  ,texts[i][text_direction].y -  (m.width * 1.5) ,textyb - textyt, m.width * 3);
+                var 
+                    rect_height = textyb - textyt,
+                    rect_left = texts[i][text_direction].x,
+                    rect_right = texts[i][text_direction].x + rect_height,
+                    rect_top = texts[i][text_direction].y - (m.width * 1.5),
+                    rect_bottom = texts[i][text_direction].y + (m.width * 1.5);
+
+                if(texts[i].url)
+                {
+                    if(cursor.x >= rect_left  && cursor.x <= rect_right && cursor.y >= rect_top && cursor.y < rect_bottom)
+                    {
+                        ctx.fillStyle = '#C4772B';
+                        canvas.style.cursor = "pointer";
+                        activelink = texts[i].url;
+                        cursorOnTextLink = true;
+                    }
+                }
                 ctx.save();
                 ctx.translate(texts[i][text_direction].x, texts[i][text_direction].y);
                 ctx.rotate(Math.PI/2);
                 ctx.textAlign = "center";            
-                ctx.fillText(texts[i][text_direction].text, 0,0);
+                ctx.fillText(texts[i].text, 0,0);
                 ctx.restore();
-
             }
             else
             {
-                ctx.fillText(texts[i][text_direction].text, texts[i][text_direction].x, texts[i][text_direction].y);
+                if(texts[i].url)
+                {
+                    if(cursor.x >= textxl && cursor.x <= textxr && cursor.y >= textyt && cursor.y < textyb)
+                    {
+                        ctx.fillStyle = '#C4772B';
+                        canvas.style.cursor = "pointer";
+                        activelink = texts[i].url;
+                        cursorOnTextLink = true;
+                    }
+                }
+                ctx.fillText(texts[i].text, texts[i][text_direction].x, texts[i][text_direction].y);
             }
         }
 
-        if(cursorInPath >= 0)
+        canvas.style.cursor = "default";
+        if(cursorInPath >= 0 || cursorOnTextLink)
         {
             canvas.style.cursor = "pointer";
-            drawTooltip(paths[cursorInPath].tooptip, 16, "white", paths[cursorInPath].color, "white");
-        }
-        else
-        {
-            canvas.style.cursor = "default";
+            if(cursorInPath >= 0)
+                drawTooltip(paths[cursorInPath].tooptip, 16, "white", paths[cursorInPath].color, "white");
         }
         requestAnimationFrame(drawChart);
     }
