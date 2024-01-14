@@ -535,7 +535,7 @@ header
 #main-menu.background-header .dropdown-toggle.active,
 #main-menu .dropdown-item.active,
 #main-menu .dropdown-item.active:hover {
-  color: #C4772B;
+  color: #C4772B !important;
 }
 
 #main-menu .dropdown-item:not(.active):hover {
