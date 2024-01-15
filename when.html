@@ -2,9 +2,22 @@
 layout: our-services
 page_icon: "/assets/images/courses/student.png"
 banner_image: "/assets/images/backgrounds/studying-together.png" 
-text: "Our courses and events"
+text: "Обучения и срещи"
 ---
-<p>На тази страница ще ви информираме за всички предстоящи онлайн и присъствени курсове, работилници, мастър класове и срещи с писатели. Можете да се абонирате и да получавате такава информация тук.</p>
+<style>
+    .when-page h2 {
+        font-size: 27px !important;
+        text-transform: none !important;
+    }
+
+    .when-page p {
+        font-size: 19px;
+    }
+</style>
+
+<div class="when-page">
+<p>На тази страница ще ви информираме за всички предстоящи онлайн и присъствени курсове, работилници, мастър класове и срещи с писатели. 
+    Можете да се абонирате и да получавате информация за тях тук.</p>
 
 
 {% assign today_date = "now" | date: '%s' | plus: 1 %}
@@ -24,22 +37,22 @@ text: "Our courses and events"
 {% assign past_events_count = past_events | size %}
 
 
-<h2>Upcoming events</h2>
+
 
 {% if future_events_count > 0 %}
+    <h2>Предстоящи събития</h2>
     {% for e in future_events %}
         {% include event_info.html event=e %}
     {% endfor %}
 {% else %}
-    <div>No future events</div>
+    <div>Очаквайте!</div>
 {% endif %}
 
-<h2>Past events</h2>
 
 {% if past_events_count > 0 %}
+    <h2>Минали събития</h2>
     {% for e in past_events %}
         {% include event_info.html event=e %}
     {% endfor %}
-{% else %}
-    <div>No past events</div>
 {% endif %}
+</div>
