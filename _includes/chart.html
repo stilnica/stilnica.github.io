@@ -28,7 +28,7 @@
         y: undefined
     }
     var scale = 1;
-    var buffer_margin = 12; c_height = 164 * scale, c_margin = c_height/2,  c_width = 150 * scale, tip_size = 39 * scale, text_margin = 15*scale;
+    var buffer_margin = 12; c_height = 164 * scale, c_margin = c_height/2,  c_width = 115 * scale, tip_size = 39 * scale, text_margin = 15*scale;
 
     var paths = [];
     var texts = [];
@@ -85,7 +85,7 @@
 
     // go over all the steps, except the last (if there are more than one)
     // go over the last step
-    {% assign steps_count = include.steps | size %}
+    {% assign steps_count = include.steps | where: "include_in_chart", true | size %}
     {% assign main_steps_count = steps_count | minus: 1  %}
 
 /*
@@ -123,8 +123,10 @@ c_margin + (c_height /2)
 
 
     //more than one step (more than 0 main steps)
-    {% if  main_steps_count > 0 %}        
-        {% for step in site.services limit:main_steps_count  %}
+    {% if  main_steps_count > 0 %}
+        {% assign svcs = site.services | where: "include_in_chart", true %}
+        {% for step in svcs limit:main_steps_count  %}
+        {% if step.include_in_chart %}
             //horizontal
             paths.push(
                 {
@@ -149,7 +151,7 @@ c_margin + (c_height /2)
                     icon: "{{ step.icon }}",
                     color: "{{ step.color }}",
                     color_hover: "{{ step.color_hover }}",
-                    text: "{{ step.text }}",
+                    text: {% if step.chart_text%}"{{ step.chart_text }}"{% else %}"{{ step.text }}"{% endif %},
                     url: "{{ step.url  | relative_url | remove : '.html' }}",
                     tooptip: "{{ step.tooltip }}",
                     use_image_for_chart: "{{ step.use_image_for_chart }}".toUpperCase().trim() == "TRUE",
@@ -180,11 +182,12 @@ c_margin + (c_height /2)
                 image.src = "{{step.icon}}";//"/assets/images/icons/icon_bg.png";//
                 icon_images["{{forloop.index0}}"] = image;
             }
+        {% endif %}
         {% endfor %}
     {% endif %}
     // there is a final step (more than 0 in total)
     {% if steps_count > 0 %}
-    {% assign step = include.steps | last %}
+    {% assign step = include.steps | where: "include_in_chart", true | last %}
         paths.push(
             {
                 path_horizontal : [
@@ -228,12 +231,12 @@ c_margin + (c_height /2)
     {% for text in include.texts %}
         texts.push({
             horizontal: {
-                x: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
+                x: /*buffer_margin +*/ ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
                 y: ("{{text.position}}".trim().toLowerCase()=="top")? c_margin/3 : c_height * 1.5 + 2* c_margin/3
             },
             vertical: {
                 x: ("{{text.position}}".trim().toLowerCase()=="top")? c_height * 1.5 + 2* c_margin/3: c_margin/3,
-                y: buffer_margin + ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
+                y: /*buffer_margin +*/ ((( ({{text.from}}-1 ) * c_width) + ({{text.to}}* c_width ))/2),
             },
             text: "{{text.text}}",
             url: "{{ text.url }}"

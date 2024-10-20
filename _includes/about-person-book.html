@@ -13,10 +13,16 @@
                 <li>{{ award }}</li>
             {% endfor %}
         </ul>
+        {% if include.book.bulleted_info %}
         <ul>
             {% for info_line in include.book.info %}
                 <li>{{ info_line }}</li>
             {% endfor %}
-        </ul>        
+        </ul>
+        {% else %}
+            {% for info_line in include.book.info %}
+                <div>{{ info_line }}</div>
+            {% endfor %}
+        {% endif %}      
     </span>
 </div>

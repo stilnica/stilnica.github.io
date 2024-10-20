@@ -112,7 +112,6 @@ body {
 }
 
 
-
 .jumpt-to-section {
   /*min-height: 100vh !important;
   flex-grow: 1;*/
@@ -262,6 +261,12 @@ body {
 
 .service-content.publishing ul li::before {
   content: "\f57b";
+}
+
+.about-person-section-title {
+  font-size:32px;
+  color: #C4772B;
+  font-weight: 700;
 }
 
 /* 

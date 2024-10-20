@@ -32,7 +32,7 @@ name: СТИЛница
 
 #URLs
 contactform_server: https://simple-node-proxy.vercel.app
-homepage: index_new.html
+homepage: index.html
 
 # Build settings
 theme: minima
@@ -86,7 +86,8 @@ collections:
       - rewriting.html
       - editing.html
       - correcting.html
-      - publishing
+      - annotation.html
+      - publishing.html
 
   process:
     output: true

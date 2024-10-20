@@ -32,7 +32,7 @@
 </div>
 <div class="container-fluid subheader subheader-menu" style="background-color: white; top: 86px; position: fixed; z-index: 100;">
   <div id="subheader-container" class="container">
-    <div id="person-subheader-name" style="color:#C4772B;" id="person-fixed-bar">
+    <div id="person-subheader-name" style="color:#C4772B; font-weight:600;" id="person-fixed-bar">
       {% if page.firstname %}
         {{ page.firstname }}
       {% endif%}
@@ -133,7 +133,7 @@
     <div class="row" style="color: #cfcfcf;">
       <div class="col-lg-8 mx-auto pt-3 pb-3" style="line-height: 1.8; padding-bottom: 65px !important;">
 
-        <p><strong style="font-size:32px;">Книги</strong></p>
+        <p class="about-person-section-title">Книги и награди</p>
         {% for book in page.books-of %}
           {% assign bookitem = site.books | where: "item-id", book  | first %}
           {% include about-person-book.html book=bookitem %}
@@ -149,7 +149,7 @@
     <div class="row pt-3 pb-3">
       <div class="col-lg-8 mx-auto">
 
-        <p><strong style="font-size:32px;">Отзиви</strong></p>
+        <p class="about-person-section-title">Отзиви</p>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-3 mt-4"><!---->
         {% for medialink in page.review_links %}
           {% include medialink.html link=medialink quote_symbol=true %}
@@ -166,7 +166,7 @@
     <div class="row pt-3 pb-3">
       <div class="col-lg-8 mx-auto">
 
-        <p><strong style="font-size:32px;">Интервюта</strong></p>
+        <p class="about-person-section-title">Интервюта</p>
         <div class="row-cols-2 row-cols-md-3 row row-cols-lg-3 row-cols-xl-4 g-4 mt-5"> <!-- row-cols-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 g-4 mt-5 -->
 
         {% for interviewlink in page.interview_links %}
