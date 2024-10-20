@@ -66,6 +66,11 @@ font & reset css
   src: url("../fonts/rafale/rafale-bg.otf")
 }
 
+@font-face {
+  font-family: "B52";
+  src: url("../fonts/B52.woff")
+}
+
 /*
 ==============================================
 NEW STUFF
