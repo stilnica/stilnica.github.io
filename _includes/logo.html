@@ -1,6 +1,7 @@
 {%  assign font_size = 50 %}
 {%  assign top = 0 %}
 {%  assign left = 0 %}
+{%  assign margin_right = 0 %}
 {% if include.font_size %}
     {%  assign font_size = include.font_size %}
 {% endif  %}
@@ -10,8 +11,13 @@
 {% if include.left %}
     {%  assign left = include.left %}
 {% endif  %}
+{% if include.margin_right %}
+    {%  assign margin_right = include.margin_right %}
+{% endif  %}
 
-<span style="position:relative; top: {{ top }}px; left: {{ left }}px;">
+
+
+<span style="position:relative; top: {{ top }}px; left: {{ left }}px; margin-right: {{ margin_right }}px;">
     <span class="mastilnitsata mastilnitsata-hipster-m" style="font-size:{{ font_size }}px"></span>
     <span style="font-family: karano;font-size:{{ font_size }}px;position: relative;top: 3px;left: -6px; font-weight: normal; text-transform: none;">стилница</span>
 </span>
