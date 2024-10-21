@@ -1,10 +1,16 @@
+{% if jekyll.environment == "production" %}
+    {% assign siteurl="https://stilnica.com" %}
+{%else%}
+    {% assign siteurl = site.url %}
+{% endif %}
+
 {% assign title="стилница" %}
 {% assign description="стилница е място за бутикови литературни услуги и топла връзка с издателите. Ние сме ловци на проза. Работим само с ръкописи, в които прозират силни бъдещи книги."  %}
-{% assign img = "https://stilnica.com/assets/images/og/stilnica-og.png" %}
+{% assign img = "{{ siteurl }}/assets/images/og/stilnica-og.png" %}
 
 {% if(page.title) %}{% assign title="стилница | " | append: page.title %}{% endif %}
 {% if(page.description) %}{% assign description=page.description %}{% endif %}
-{% if(page.page_img) %}{% assign img="https://stilnica.com" | append: page.page_img %}{% endif %}
+{% if(page.page_img) %}{% assign img= siteurl | append: page.page_img %}{% endif %}
 
 {% if page.url contains '://' %}
 {% assign currentUrl = page.url %}
@@ -34,7 +40,7 @@
 <meta name="twitter:image" content="https://yourwebsite.com/path-to-your-image.jpg">
  -->
 <!-- Canonical URL -->
-<link rel="canonical" href="https://stilnica.com">
+<link rel="canonical" href="{{ siteurl }}">
 
 <!-- Additional Meta Tags for Enhanced Search Visibility -->
 <meta name="theme-color" content="#C4772B">
