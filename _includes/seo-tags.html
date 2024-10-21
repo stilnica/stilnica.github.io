@@ -6,6 +6,12 @@
 {% if(page.description) %}{% assign description=page.description %}{% endif %}
 {% if(page.page_img) %}{% assign img="https://stilnica.com" | append: page.page_img %}{% endif %}
 
+{% if page.url contains '://' %}
+{% assign currentUrl = page.url %}
+{%else%}
+{% assign currentUrl = page.url | prepend: siteurl %}
+{% endif %}
+
 <!-- Basic Meta Tags -->
 <meta name="description" content="{{ description }}">
 
@@ -18,7 +24,7 @@
 <meta property="og:title" content="{{ title }}">
 <meta property="og:description" content="{{ description }}">
 <meta property="og:image" content="{{ img }}">
-<meta property="og:url" content="https://stilnica.com">
+<meta property="og:url" content="{{ currentUrl }}">
 <meta property="og:type" content="website">
 
 <!-- Twitter Meta Tags
