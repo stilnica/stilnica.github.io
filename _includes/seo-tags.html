@@ -1,0 +1,35 @@
+{% assign title="стилница" %}
+{% assign description="стилница е място за бутикови литературни услуги и топла връзка с издателите. Ние сме ловци на проза. Работим само с ръкописи, в които прозират силни бъдещи книги."  %}
+{% assign img = "https://stilnica.com/assets/images/hipster-m.png" %}
+
+{% if(page.title) %}{% assign title="стилница | " | append: page.title %}{% endif %}
+{% if(page.description) %}{% assign description=page.description %}{% endif %}
+{% if(page.page_img) %}{% assign img=page.page_img %}{% endif %}
+
+<!-- Basic Meta Tags -->
+<meta name="description" content="{{ description }}">
+
+<!-- SEO Meta Tags -->
+<meta name="keywords" content="{{ description }}">
+<meta name="author" content="Антония Апостолова">
+<meta name="robots" content="index, follow">
+
+<!-- Social Media Meta Tags (Open Graph for Facebook, LinkedIn) -->
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:image" content="{{ img }}">
+<meta property="og:url" content="https://stilnica.com">
+<meta property="og:type" content="website">
+
+<!-- Twitter Meta Tags
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Literary Website Name">
+<meta name="twitter:description" content="Dive into literary content, book reviews, and writing advice.">
+<meta name="twitter:image" content="https://yourwebsite.com/path-to-your-image.jpg">
+ -->
+<!-- Canonical URL -->
+<link rel="canonical" href="https://stilnica.com">
+
+<!-- Additional Meta Tags for Enhanced Search Visibility -->
+<meta name="theme-color" content="#C4772B">
+<meta name="language" content="Bulgarian">

@@ -9,7 +9,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<title>стилница</title>
+<title>стилница{% if(page.title) %} | {{ page.title }} {% endif %}</title>
+
+{% include seo-tags.html %}
 
 <!-- Bootstrap core CSS -->
 <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
