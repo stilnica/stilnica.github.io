@@ -13,9 +13,9 @@
 {% if(page.page_img) %}{% assign img= siteurl | append: page.page_img %}{% endif %}
 
 {% if page.url contains '://' %}
-{% assign currentUrl = page.url %}
+{% assign currentUrl = page.url | remove: '.html' %}
 {%else%}
-{% assign currentUrl = page.url | prepend: siteurl %}
+{% assign currentUrl = page.url | prepend: siteurl  | remove: '.html' %}
 {% endif %}
 
 <!-- Basic Meta Tags -->
