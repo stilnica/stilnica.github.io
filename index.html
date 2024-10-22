@@ -223,7 +223,7 @@ layout: default
               <li>
                   <img src="/assets/images/testimonials/{{ testimonial.image }}" />
                 <div class="testimonial-title">
-                  {{ testimonial.name }}, {{ testimonial.ref }}
+                  {{ testimonial.name }}{% if testimonial.ref %}, {{ testimonial.ref }}{% endif %}
                 </div>
                 <div class="testimonial-text">
                   {{ testimonial.text }}
