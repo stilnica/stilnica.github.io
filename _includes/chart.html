@@ -154,6 +154,7 @@ c_margin + (c_height /2)
                     text: {% if step.chart_text%}"{{ step.chart_text }}"{% else %}"{{ step.text }}"{% endif %},
                     url: "{{ step.url  | relative_url | remove : '.html' }}",
                     tooptip: "{{ step.tooltip }}",
+                    tooltip_show: "{{ step.tooltip_show }}".toUpperCase().trim() == "TRUE",
                     use_image_for_chart: "{{ step.use_image_for_chart }}".toUpperCase().trim() == "TRUE",
                     img: new Image(),
                     img_src: "{{ step.banner_image }}",
@@ -213,6 +214,7 @@ c_margin + (c_height /2)
                 text: "{{ step.text }}",
                 url: "{{ step.url }}",
                 tooptip: "{{ step.tooltip }}",
+                tooltip_show: "{{ step.tooltip_show }}".toUpperCase().trim() == "TRUE",
                 use_image_for_chart: "{{ step.use_image_for_chart }}".toUpperCase().trim() == "TRUE",
                 img: new Image(),
                 img_src: "{{ step.banner_image }}",
@@ -592,7 +594,7 @@ c_margin + (c_height /2)
         if(cursorInPath >= 0 || cursorOnTextLink)
         {
             canvas.style.cursor = "pointer";
-            if(cursorInPath >= 0)
+            if(cursorInPath >= 0 && paths[cursorInPath].tooltip_show)
                 drawTooltip(paths[cursorInPath].tooptip, 16, "white", paths[cursorInPath].color, "white");
         }
         requestAnimationFrame(drawChart);
