@@ -114,6 +114,12 @@ body {
   display: none;
   cursor: pointer;
   z-index: 90000;
+
+  transition: transform 0.15s ease; /* Animation for smooth resizing */
+}
+
+#scrollup:active {
+  transform: scale(0.64); /* 45px / 70px = 0.64 */
 }
 
 
