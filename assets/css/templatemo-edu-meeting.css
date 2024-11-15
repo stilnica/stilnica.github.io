@@ -71,6 +71,12 @@ font & reset css
   src: url("../fonts/B52.woff")
 }
 
+@font-face {
+  font-family: "architectural";
+  src: url("../fonts/architectural/MONITORICA-RG.TTF")
+}
+
+
 /*
 ==============================================
 NEW STUFF
