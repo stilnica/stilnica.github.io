@@ -27,11 +27,28 @@ layout: default
           <p>
             В този нелек и понякога болезнен процес до издаването ще бъдем дясната Ви ръка.
             <a href="#services" style="color: #C4772B; background-color: black; font-weight: bold;">Вижте как!</a><br/><br/>
-
-            </p>
+          </p>
           
-            {% include contact-us-button.html %}
-        
+          {% include contact-us-button.html %}
+          
+          <!--
+          <div style="display: flex;">
+            <div>
+            
+            </div>
+
+            <div>
+              <div style="margin-top: 0px;margin-bottom: 30px;background: white;display: inline-block;padding: 10px;opacity: 0.7;border-radius: 12px;">
+                <h6 style="color: #C4772B;margin-bottom: 14px;">Our partners</h6>
+                {% assign partners = site.partners | where: "visible", true %}
+                {% for partner in partners %}
+                  <img src="{{ partner.logo }}" style="height: 50px; width: auto; margin-right: 10px;" />
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          -->
+
         </div>
 
 
@@ -41,6 +58,9 @@ layout: default
   </div>
 </section>
 <!-- ***** Main Banner Area End ***** -->
+
+
+
 
 <!--Our services chart -->
 <style>
@@ -72,7 +92,30 @@ layout: default
 </section>
 <!--/Our services chart -->
 
-
+<section id="partners" class="partners" style="background: linear-gradient(180deg, rgba(30,34,37,1) 0%, rgba(255,255,255,1) 100%);">
+  <div class="container">
+    <div class="row">
+      <div class="col-12" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="section-heading" style="display:flex; justify-content: center; ">
+          <h2 style="margin-bottom: 0px;">Наши партньори</h2>
+        </div>
+        <div style="display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; margin: 34px 0px; ">
+          {% assign partners = site.partners | where: "visible", true %}
+          {% for partner in partners %}
+              
+             <a href="/partners"><img src="{{ partner.logo }}" style="height: 50px; width: auto; margin-right: 20px; "></a>
+          
+          {% endfor %}
+        </div>
+        <div>
+          <div class="main-button-red" style="margin-top: 30px;">
+            <div style=" display: flex; flex-direction: row; justify-content: center;"><a href="/partners">Научи повече</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <style>
     .my-flipster img {
