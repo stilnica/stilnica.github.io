@@ -1,0 +1,28 @@
+---
+layout: info-page
+title: "Кой: Партньори"
+banner_image: "/assets/images/backgrounds/cafe-bar-talk-cropped-bw-crop.jpg"
+page_img: assets/images/backgrounds/cafe-bar-talk-cropped-bw-crop.jpg
+page_title: "<i class=\"fa-solid fa-handshake\" style=\"color:#cfcfcf\"></i> Партньори"
+bg_mode: fixed
+bg_pos: top
+text: "Партньори"
+---
+
+
+<div>
+    Наши партньори са подбрани колеги редактори, творческа академия за писане, професионална печатница, както и издателства, 
+    които залагат на добрата българска литература и имат ресурс да публикуват дебютни автори. 
+    С всеки един от партньорите си имаме различен тип взаимодействие. 
+    В случай че проявите интерес, ще ви дадем  подробности за това как и те могат да бъдат 
+    полезни по пътя към Вашата готова книга.
+</div>
+
+<div style="display:flex;flex-direction: row;flex-wrap: wrap;align-content: center;justify-content: center; align-items: center; ">
+{% assign partners = site.partners | where: "visible", true %}
+{% for partner in partners %}
+    
+    {% include partner-card.html partner=partner %}
+
+{% endfor %}
+</div>

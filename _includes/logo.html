@@ -6,6 +6,7 @@
 {%  assign fine_tune_m_pos_top = 0 %}
 {%  assign fine_tune_ctilnica_pos_top = 3 %}
 {%  assign fine_tune_ctilnica_pos_left = -6 %}
+{%  assign fine_tune_ctilnica_margin_left = 0 %}
 
 {% if include.font_size %}
     {%  assign font_size = include.font_size %}
@@ -30,9 +31,13 @@
     {%  assign fine_tune_ctilnica_pos_left = include.fine_tune_ctilnica_pos_left %}
 {% endif  %}
 
+{% if include.fine_tune_ctilnica_margin_left %}
+    {%  assign fine_tune_ctilnica_margin_left = include.fine_tune_ctilnica_margin_left %}
+{% endif  %}
+
 <span style="position:relative; top: {{ top }}px; left: {{ left }}px; margin-right: {{ margin_right }}px;">
     <span class="mastilnitsata mastilnitsata-hipster-m" style="font-size:{{ font_size }}px; position: relative; top: {{ fine_tune_m_pos_top }}px"></span>
-    <span style="font-family: karano;font-size:{{ font_size }}px;position: relative;top: {{ fine_tune_ctilnica_pos_top }}px;left: {{ fine_tune_ctilnica_pos_left }}px; font-weight: normal; text-transform: none;">стилница</span>
+    <span style="font-family: karano; font-size:{{ font_size }}px; position: relative;top: {{ fine_tune_ctilnica_pos_top }}px; left: {{ fine_tune_ctilnica_pos_left }}px; font-weight: normal; text-transform: none; margin-left: {{ fine_tune_ctilnica_margin_left }}px;">стилница</span>
 </span>
 
 

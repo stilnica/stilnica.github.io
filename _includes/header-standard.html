@@ -53,7 +53,7 @@
                         <!--<li class="nav-item "><a href="/{{ site.homepage }}#top" {{ top_ref }} class="nav-link">Начало</a></li>-->
 
                         <!-- people -->
-                        {% if current_url contains "/people/" %}
+                        {% if current_url contains "/people/" or current_url contains "/partners" %}
                             {% assign active_class="active" %}
                         {% else %}
                             {% assign active_class="" %}
@@ -63,8 +63,8 @@
                                 Кой
                             </a>
                             <div class="dropdown-menu" aria-labelledby="whoDropdownMenuLink">
-                                {% assign people = site.people | where: "visible", true %}
-                                {% for person in people %}
+                            {% assign people = site.people | where: "visible", true %}
+                            {% for person in people %}
                                 {% assign person_url = person.url | relative_url | remove : '.html' %}
                                 {% if current_url == person_url %}
                                 {% assign person_active_class="active" %}
@@ -73,8 +73,13 @@
                                 {% endif %}
 
                                 <a href="{{person.url | relative_url | remove : '.html'}}" class="dropdown-item {{ person_active_class }}">{{ person.firstname }} {{ person.lastname }}</a>
-                            {% endfor %}                                
-                            <a href="/index.html" class="dropdown-item {{ person_active_class }}">Партньори</a>
+                            {% endfor %}
+                            {% if current_url == "/partners" %}
+                                {% assign person_active_class="active" %}
+                            {% else %}
+                                {% assign person_active_class="" %}
+                            {% endif %}
+                            <a href="/partners" class="dropdown-item {{ person_active_class }}">Партньори</a>
                             </div>
                         </li>
                         <!-- people -->

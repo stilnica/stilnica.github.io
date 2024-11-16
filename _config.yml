@@ -77,6 +77,15 @@ collections:
   events:
     output: true
   
+  partners:
+    output: false
+    order:
+     - redaktorite.html
+     - zaeshka.html
+     - atera.html
+     - riba.html
+     - zhenet45.html
+
   # our services
   services:
     output: true

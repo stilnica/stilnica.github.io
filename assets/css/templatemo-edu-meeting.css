@@ -1457,6 +1457,60 @@ section.contact-us .right-info ul li span {
 }
 
 /*
+-------------------------------------------------------------
+Partners page
+-------------------------------------------------------------
+*/
+.partner-link .card {
+  width: 270px; 
+  height: 400px; 
+  margin: 25px 25px 0px 0px;
+
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+.partner-link .card:hover  {
+  transform: scale(1.1);
+  z-index: 3000;
+  opacity: 1;
+}
+
+.partner-link .card .img_container{ 
+  height: 30%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.partner-link .card .img_container img { 
+  height: 100%;
+  width: auto; 
+  align-self:center;
+  padding: 0px 1rem;
+}
+
+.partner-link .card .img_container img.img_wide { 
+  width: 100%;
+  height: auto;
+}
+
+.partner-link .card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.partner-link .card .card-body .card-text {
+  color: #1e1e1e;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 0px;
+}
+
+
+/*
 ---------------------------------------------
 heading page
 ---------------------------------------------
