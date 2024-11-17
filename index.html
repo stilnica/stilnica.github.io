@@ -99,7 +99,7 @@ layout: default
         <div class="section-heading" style="display:flex; justify-content: center; ">
           <h2 style="margin-bottom: 0px;">Нашите партньори</h2>
         </div>
-        <div style="display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; margin: 34px 0px; ">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin: 34px 0px; ">
           {% assign partners = site.partners | where: "visible", true %}
           {% for partner in partners %}
               
