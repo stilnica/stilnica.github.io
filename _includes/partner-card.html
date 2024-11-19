@@ -6,13 +6,24 @@
     {% assign img_wide_class = "img_wide" %}
 {% endif %}
 
+<!---->
+
+{% if include.partner.link %}
 <a class="partner-link" href="{{ include.partner.site }}" target="_blank">
-        <div class="card">
+{% else %}
+<div class="partner-link">
+{% endif %}
+    <div class="card">
         <div class="img_container">
             <img src="{{ include.partner.logo }}" class="card-img-top {{img_wide_class}}">
         </div>
         <div class="card-body">
             <p class="card-text">{{ include.partner.text }}</p>
         </div>
-        </div>
+    </div>
+
+{% if include.partner.link %}
 </a>
+{% else %}
+</div>
+{% endif %}
