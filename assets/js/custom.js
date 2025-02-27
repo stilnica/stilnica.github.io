@@ -93,6 +93,20 @@
 			window.scrollTo({top: scroll_to, behavior: "smooth"});
 	    });
 		*/
+
+		//collapse the hamburger menu when clicked outside (when in mobile mode is expanded)
+		$(document).click(function (event) {
+			let $navbar = $(".navbar-collapse");
+			let $toggler = $(".navbar-toggler");
+
+			// If navbar is open and click is outside, collapse it
+			if ($navbar.hasClass("show") && !$navbar.is(event.target) && $navbar.has(event.target).length === 0 && !$toggler.is(event.target) && $toggler.has(event.target).length === 0) {
+				$navbar.collapse("hide");
+				$toggler.addClass("collapsed"); // Ensure toggler icon returns to normal state
+				$(".navbar-toggler .toggle input[type='checkbox']").prop( "checked", false );
+			}
+		});
+
 	});
 	/*
 	// scroll event
