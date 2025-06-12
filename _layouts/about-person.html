@@ -168,8 +168,9 @@
 
         <p class="about-person-section-title">Интервюта</p>
         <div class="row-cols-2 row-cols-md-3 row row-cols-lg-3 row-cols-xl-4 g-4 mt-5"> <!-- row-cols-2 row-cols-md-4 row-cols-lg-4 row-cols-xl-4 g-4 mt-5 -->
-
-        {% for interviewlink in page.interview_links %}
+        
+        {% assign sorted_interviews = page.interview_links | sort: 'date' | reverse %}
+        {% for interviewlink in sorted_interviews %}
           {% include interviewlink.html link=interviewlink %}
         {% endfor %}
 
