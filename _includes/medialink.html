@@ -19,6 +19,9 @@
           </div>
         </div>
       </div>
+      <span class="media-date">
+        <small>{{ include.link.date  | date: "%d/%m/%Y" }}</small>
+      </span>
       {% if include.link.medialogo and include.link.medialogo != "" %}
       <img class="media-logo" src="/assets/images/media-logos/{{ include.link.medialogo }}">
       {% endif %}

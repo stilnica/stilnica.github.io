@@ -151,7 +151,8 @@
 
         <p class="about-person-section-title">Отзиви</p>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 g-3 mt-4"><!---->
-        {% for medialink in page.review_links %}
+        {% assign sorted_media = page.review_links | sort: 'date' | reverse %}
+        {% for medialink in sorted_media %}
           {% include medialink.html link=medialink quote_symbol=true %}
         {% endfor %}
         </div>
