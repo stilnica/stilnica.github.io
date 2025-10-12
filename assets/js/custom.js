@@ -106,7 +106,6 @@
 				$(".navbar-toggler .toggle input[type='checkbox']").prop( "checked", false );
 			}
 		});
-
 	});
 	/*
 	// scroll event

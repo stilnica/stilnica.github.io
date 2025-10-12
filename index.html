@@ -543,7 +543,7 @@ layout: default
     <div class="col-lg-9 align-self-center">
       <div class="row">
         <div class="col-lg-12">
-          <form id="contact" onsubmit="return contact_submit();" style="position:relative">
+          <form id="contact" onsubmit="return contact_submit(event);" style="position:relative">
 
             <!-- wait animation -->
     <style>
@@ -622,6 +622,28 @@ layout: default
                     required=""></textarea>
                 </fieldset>
               </div>
+              
+              <div class="col-lg-12">
+                <div class="d-flex align-items-center flex-row captcha-container">
+                  <div 
+                    class="g-recaptcha" 
+                    data-sitekey="6LeeyeYrAAAAALDc0Q6zBq3pe5EeRRHvWCyfZoWp" 
+                    data-size='normal' 
+                    data-theme='light'>
+                  </div>
+                  
+                  <div id="captcha-popover" class="custom-popover d-none">
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                      <img src="/assets/images/robot.png" />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+              
               <div class="col-lg-12">
                 <fieldset>
                   <button type="submit" id="form-submit" class="button" style="background-color: #C4772B; font-weight: bold; font-size: 18px;">ИЗПРАТИ</button>
@@ -679,9 +701,18 @@ layout: default
 
 
 
-  function contact_submit()
+  function contact_submit(e)
   {
+    e.preventDefault();
+    document.getElementById('captcha-popover').classList.add('d-none');
 
+    const captchaResponse = grecaptcha.getResponse();
+    if(captchaResponse.length <= 0) {
+      //robot
+      document.getElementById('captcha-popover').classList.remove('d-none');
+      //alert("You are a robot!")
+      return false;
+    }
 
     var contactformSendingOverlay = document.getElementById("contact-sending");
     var contactformEmail = document.getElementById("contact-email");

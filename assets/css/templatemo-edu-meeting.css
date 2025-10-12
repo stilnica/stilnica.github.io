@@ -76,6 +76,41 @@ font & reset css
   src: url("../fonts/architectural/MONITORICA-RG.TTF")
 }
 
+.captcha-container {
+    margin-bottom: 30px;
+}
+
+.g-recaptcha iframe {
+    border-radius: 10px;
+    width: 302px;
+    height: 76px;
+ }
+
+.custom-popover {
+  display: flex;
+  align-items: center;
+}
+
+.custom-popover .arrow {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #FF7F7F;
+}
+
+.popover-content {
+  padding: 10px 15px;
+  background-color: #FF7F7F;
+  border: 1px solid #FF7F7F;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.custom-popover img {
+  width: 40px;
+}
+
 
 /*
 ==============================================
