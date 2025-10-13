@@ -624,18 +624,21 @@ layout: default
               </div>
               
               <div class="col-lg-12">
-                <div class="d-flex align-items-center flex-row captcha-container">
+                <div class="d-flex align-items-center captcha-container">
                   <div 
                     class="g-recaptcha" 
                     data-sitekey="6LeeyeYrAAAAALDc0Q6zBq3pe5EeRRHvWCyfZoWp" 
                     data-size='normal' 
-                    data-theme='light'>
+                    data-theme='light'
+                    data-callback="user_is_not_a_robot">
                   </div>
                   
-                  <div id="captcha-popover" class="custom-popover d-none">
-                    <div class="arrow"></div>
-                    <div class="popover-content">
-                      <img src="/assets/images/robot.png" />
+                  <div id="captcha-popover" class="hidden-animated">
+                    <div  class="custom-popover">
+                      <div class="arrow"></div>
+                      <div class="popover-content">
+                        <img src="/assets/images/robot.png" />
+                      </div>
                     </div>
                   </div>
 
@@ -645,7 +648,7 @@ layout: default
 
               
               <div class="col-lg-12">
-                <fieldset>
+                <fieldset class="send-button-container">
                   <button type="submit" id="form-submit" class="button" style="background-color: #C4772B; font-weight: bold; font-size: 18px;">ИЗПРАТИ</button>
                 </fieldset>
               </div>
@@ -699,18 +702,19 @@ layout: default
 
 <script>
 
+  function user_is_not_a_robot(){
+    document.getElementById('captcha-popover').classList.remove('visible-animated');
+  }
 
 
   function contact_submit(e)
   {
     e.preventDefault();
-    document.getElementById('captcha-popover').classList.add('d-none');
+    document.getElementById('captcha-popover').classList.remove('visible-animated');
 
     const captchaResponse = grecaptcha.getResponse();
     if(captchaResponse.length <= 0) {
-      //robot
-      document.getElementById('captcha-popover').classList.remove('d-none');
-      //alert("You are a robot!")
+      document.getElementById('captcha-popover').classList.add('visible-animated');
       return false;
     }
 
@@ -734,17 +738,14 @@ layout: default
       contactformSendingOverlay.classList.add("unhidden-form");
     }, 10)
     var sendobj = JSON.stringify(
-    {
-      "from": {
-        "email": contactformEmail.value,
-        "name": contactformName.value
-      },
-      "subject": contactformSubject.value,
-      "body": contactformMessage.value
-    }
-
-
-
+      {
+        "from": {
+          "email": contactformEmail.value,
+          "name": contactformName.value
+        },
+        "subject": contactformSubject.value,
+        "body": contactformMessage.value
+      }
     );
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
     xmlhttp.open("POST", "{{site.contactform_server}}/api/contact-form/");
@@ -784,6 +785,7 @@ layout: default
               modal_delivered_close.classList.add("btn-danger");
             }
             modal_delivered.modal('show');
+            grecaptcha.reset();
             return false;
           } else {
             console.log("Error", xmlhttp.statusText);
@@ -793,7 +795,7 @@ layout: default
               modal_delivered_close.classList.remove("btn-success");
               modal_delivered_close.classList.add("btn-danger");
               modal_delivered.modal('show');
-
+              grecaptcha.reset();
             return false;
           }
       }
