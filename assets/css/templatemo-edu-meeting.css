@@ -110,6 +110,7 @@ font & reset css
     border-bottom: 10px solid #FF7F7F;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
+    border-top: 0px;
   }
 
   .send-button-container {
