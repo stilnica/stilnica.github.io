@@ -6,9 +6,18 @@ layout: default
 ---
  <!-- ***** Main Banner Area Start ***** -->
  <section class="section main-banner" id="top" data-section="section1"> <!--style="height:700px; background-image: url('/assets/images/backgrounds/guillotine.jpg'); background-size: cover; background-repeat: no-repeat;"-->
-  <video autoplay muted loop id="bg-video">
-      <source src="assets/images/Ink-107242.mp4" type="video/mp4" />
+  <video autoplay muted loop id="bg-video" preload="false">
+      <!--<source src="" type="video/mp4" />-->
   </video>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+
+    video.innerHTML = 
+      `<source src="${isMobile ? '/assets/images/Ink-720.mp4' : '/assets/images/Ink-720.mp4'}" type="video/mp4" preload="false">`;
+</script>
+
   <div class="video-overlay header-text">
       <div class="container">
         <div class="row">
