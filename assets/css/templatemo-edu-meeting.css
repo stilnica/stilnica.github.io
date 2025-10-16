@@ -369,6 +369,142 @@ body {
     /*display: block;*/
 }
 
+/* SwiperJS for book covers */
+         .swiper-container-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            position: relative;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 60px 0;
+            overflow: visible;
+            padding-bottom: 60px !important;
+        }
+        
+        .swiper-wrapper {
+            align-items: center;
+        }
+
+        .swiper-slide {
+            width: 200px !important;
+            height: 300px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .swiper-slide a {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: relative;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .book-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 10px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.9),
+                -1px -1px 2px rgba(0, 0, 0, 0.7),
+                1px -1px 2px rgba(0, 0, 0, 0.7),
+                -1px 1px 2px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+
+                .swiper-button-prev,
+        .swiper-button-next {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: #90808d !important;
+            transition: all 0.3s ease;
+            font-size: 53px;
+            font-weight: 700;
+            filter: drop-shadow(3px 3px 2px rgba(10, 10, 10, 1));
+        }
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            color: white !important;
+        }
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            display: none;
+        }
+
+        .swiper-button-prev {
+            left: 10px;
+        }
+
+        .swiper-button-next {
+            right: 10px;
+        }
+
+        .swiper-pagination {
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .swiper-slide {
+                width: 150px !important;
+                height: 225px !important;
+            }
+
+            .book-title {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                font-size: 40px;
+            }
+        }
+        /*/SwiperJS for book covers */
+
 /* 
 ---------------------------------------------
 reset

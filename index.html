@@ -118,51 +118,41 @@ layout: default
   </div>
 </section>
 
-<style>
-    .my-flipster img {
-        height: 350px;
-    }
-    .flipster__button svg {
-      stroke: white;
-      filter: drop-shadow(3px 3px 2px rgba(10, 10, 10, 1));
-    }
-</style>
-<!-- SEE ALSO, FLIPSTER: http://brokensquare.com/Code/jquery-flipster/demo/-->
+<!-- BOOKS WITH SLIDERJS -->
+ <section id="books-by-our-team" style="background: linear-gradient(180deg, rgba(56,56,59,1) 0%, rgba(109,110,118,1) 92%);">
+        <div class="section-heading" style="display: flex; justify-content: center;">  
+          <h2 style="margin: 40px 0px 40px 0px;">КНИГИ, ЗА КОИТО СМЕ ОТГОВОРНИ</h2>
+        </div>  
+     <div class="swiper-container-wrapper">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
 
-<!-- Books our team worked on -->
-<section id="books-by-our-team" class="books-by-our-team" style="background: linear-gradient(180deg, rgba(56,56,59,1) 0%, rgba(109,110,118,1) 92%);"> 
-  <div class="container">
-    <div class="row">
-      <div class="col-12 chart-container">
-        <div class="section-heading" bis_skin_checked="1" style="
-        display: flex;
-        justify-content: center;
-    ">
-          <h2 style="
-        /* display: inline-flex; */
-        /* justify-content: center; */
-        margin: 40px 0px 40px 0px;
-    ">КНИГИ, ЗА КОИТО СМЕ ОТГОВОРНИ</h2>
-        </div>
-        
-
-
-        <div>
-          <div class="my-flipster">
-            <ul>
               {% assign bookz = site.books-by-us | where: "visible", true %}
               {% for book in bookz %}<!--visible: true-->
-                <li><a href="{{ book.link }}" target="_blank"><img src="/assets/images/books-by-us/{{ book.cover }}" /></a></li>
-                {% endfor %}
-                </ul>
-          </div>
-
-      </div>
-      </div>
+                <div class="swiper-slide">
+                    <a href="{{ book.link }}" target="_blank">
+                        <img src="/assets/images/books-by-us/{{ book.cover }}" alt="{{ book.title }}">
+                        <div class="book-title">{{ book.title }}</div>
+                    </a>
+                </div>                
+              {% endfor %}
+                
+            </div>
+            
+            <!-- Navigation buttons -->
+            <div class="swiper-button-prev">
+                <i class="fas fa-angle-left"></i>
+            </div>
+            <div class="swiper-button-next">
+                <i class="fas fa-angle-right"></i>
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
     </div>
-  </div>
-</section>
-<!--/Books our team worked on -->
+ </section>
+<!--/BOOKS WITH SLIDERJS-->
 
 
 <style>
