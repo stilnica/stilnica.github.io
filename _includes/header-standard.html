@@ -11,15 +11,29 @@
 {% endif %}
 
 <!-- Navigation based on standard Bootstrap 5, not theme created with ugly tricks -->
+<ul class="hidden-christmas-decorations christmas-lightrope d-none">
+    {% for i in (1..40) %}
+    <li></li>
+    {% endfor %}
+</ul> 
+<div class="container">
+        <div class="row">
+            <div class="col-12 chrstmas-hat-container">
+                <img src="/assets/images/santa-hat-rotated.png" class="hidden-christmas-decorations christmas-hat d-none" />
+            </div>
+        </div>
+    </div>
+
 <header id="main-menu" class="header-area header-sticky">
     <div class="container">
         <div class="row">
+
             <div class="col-12">
 
                 <nav id="nav-menu" class="navbar navbar-expand-lg navbar-dark bg-transparent text-light" style="padding: 0;">
                     <a class="navbar-brand {{homepage_active_class}}" href="/{{ site.homepage }}#top" {{ top_ref }} style="padding: 0; position: relative; top: -5px;">
                         <div>
-                            <div class="nav-logo-container">
+                            <div class="nav-logo-container" style="position: relative">
                                 <!--<span class="mastilnitsata mastilnitsata-stilnica" style="font-size: 63px; vertical-align: middle;"></span>-->
                                 {% include logo.html %}
                             </div>
@@ -164,7 +178,8 @@
                     </div>
                 </nav>
 
-            </div>
+            </div>             
+
         </div>
     </div>
   </header>

@@ -107,6 +107,20 @@
 			}
 		});
 
+
+		//Christmas decorations 23/12 - 04/01
+		var currentYear = (new Date()).getFullYear();
+		var beforeChristmas = new Date(currentYear + "/12/23");
+		var afterNewYear = new Date(currentYear + "/01/05");
+		var now = new Date();
+		if((now > beforeChristmas) || (now < afterNewYear))
+		{
+			var christmas_decorations = document.getElementsByClassName("hidden-christmas-decorations");
+			for(var i=0; i< christmas_decorations.length; i++) {
+				christmas_decorations[i].classList.remove("d-none");
+			}
+		}
+
 	});
 	/*
 	// scroll event
