@@ -2064,10 +2064,11 @@ responsive
 
 .christmas-hat {
   position: relative;
-  left: 13px;
-  top: 1px;
+  top: -22px;
+  left: 57px;
   width: 39px;
   z-index: 999999999;
+
 }
 
 .christmas-lightrope {
@@ -2082,7 +2083,10 @@ responsive
   padding: 0;
   pointer-events: none;
   width: 100%;
+  /*
   z-index: 1000000;
+  max-height: 48px;
+  */
 }
 
 .christmas-lightrope li {
