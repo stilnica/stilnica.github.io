@@ -128,14 +128,15 @@ layout: default
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
 
-              {% assign bookz = site.books-by-us | where: "visible", true %}
+              {% assign bookz = site.books-by-us | where: "visible", true  %}
               {% for book in bookz %}<!--visible: true-->
                 <div class="swiper-slide">
-                    <a href="{{ book.link }}" target="_blank">
+                    {% if book.link %}<a href="{{ book.link }}" target="_blank">{% endif %}
                         <img src="/assets/images/books-by-us/{{ book.cover }}" alt="{{ book.title }}">
                         <div class="book-title">{{ book.title }}</div>
-                    </a>
-                </div>                
+                    {% if book.link %}</a>{% endif %}
+                </div>
+                <!--<script>console.log("Book by us: {{ book.item-id }}")</script>-->
               {% endfor %}
                 
             </div>

@@ -7,6 +7,9 @@
 # Just run Jekyll automatically (+ npx backend)
 # docker rm -f stilnica; docker run --rm --name stilnica -v $PWD:/site -p 4000:4000 -it stilnica_site
 
+# Connect to an already running container
+# docker exec -it stilnica /bin/bash
+
 # Interactive connect
 # docker rm -f stilnica; docker run --name stilnica -v $PWD:/site -p 4000:4000 -it stilnica_site /bin/bash
 # 

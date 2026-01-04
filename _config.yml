@@ -56,19 +56,33 @@ collections:
     books: true
   
   # books we worked on
+  # Books in swiper are shown by order, First item is in the center when the list is opened.
+  # Items to the left are at the end of the list, items to the right are after the first item.
+  # https://swiperjs.com/
   books-by-us:
     output: false
     order:
-      - hunter.html
-      - dancing-with-water.html
-      - our-history.html
-      - the-cat.html
-      - hagabula.html
-      - viet-tan.html
-      - skippy.html
-      - way.html
-      - pianist.html
-      - ane.html
+    - otlomkite.html
+    - severnite.html
+    - hagabula.html
+    - ane.html
+    - dancing-with-water.html
+    - florence.html
+    - hunter.html
+    - inevitable.html
+    - lotariqta-koritca.html
+    - nevidimyat.html
+    - our-history.html
+    - pianist.html
+    - prigotvi.html
+    - rain.html
+    - skippy.html
+    - stories-with-horse.html
+    - the-cat.html
+    - vasdarzhatelyat.html
+    - viet-tan.html
+    - way.html
+    - zebrata.html
 
   # testimonials
   testimonials:
