@@ -72,6 +72,14 @@
           modifier: 1,
           slideShadows: true,
       },
+      on: {
+          init: function () {
+            setTimeout(() => {
+              this.slideToLoop(0, 0); // Jump to first slide with 0ms transition
+              this.update();       // Force a re-calculation of positions
+            }, 100); // 100ms is usually enough to bypass the browser's "memory"
+          },
+        },      
       navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
