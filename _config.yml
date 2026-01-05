@@ -73,6 +73,7 @@ collections:
     - lotariqta-koritca.html
     - nevidimyat.html
     - our-history.html
+    - zebrata.html
     - pianist.html
     - prigotvi.html
     - rain.html
@@ -82,8 +83,7 @@ collections:
     - vasdarzhatelyat.html
     - viet-tan.html
     - way.html
-    - zebrata.html
-
+    
   # testimonials
   testimonials:
     output: false
